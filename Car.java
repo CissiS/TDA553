@@ -1,73 +1,18 @@
+import java.awt.*;
 
-public abstract class Car implements Movable {
+public abstract class Car {
 //gemensamma attribut
-    protected int nrDoors;
-    protected double enginePower;
-    protected double currentSpeed;
-    protected Colour color;
-    protected String modelName;
-    protected double gas;
-    protected double brake;
-    protected double currentDirection = 90; //Bilen åker rakt fram från början (i positiv y-riktning) ska den det??
-    protected double x = 0;
-    protected double y = 90;
-
-
-    protected abstract double speedFactor();
-
-    @Override
-    public void move() {
-        double currentRadian = Math.toRadians(currentDirection);
-        double movement_x = currentSpeed * Math.cos(currentRadian);
-        double movement_y = currentSpeed * Math.sin(currentRadian);
-
-        x += movement_x;
-        y += movement_y;
-    }
-
-    @Override
-    public void turnLeft() {
-        currentDirection += 90;
-            if (current >= 360) {
-                currentDirection -= 360
-            }
-            }
-    }
-    
-    @Override
-    public void turnRight(){
-        currentDirection -= 90;
-            if (currentDirection <= 0) {
-                currentDirection += 360
-    }
-
-    public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
-    }
-
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    public void setColor(Color clr){
-	    color = clr;
-    }
-
-    public void startEngine(){
-	    currentSpeed = 0.1;
-    }
-
-    public void stopEngine(){
-	    currentSpeed = 0;
-    }
+    public int nrDoors;
+    public double enginePower;
+    public double currentSpeed;
+    public Color color;
+    public String modelName;
+    public double gas;
+    public double brake;
+    public abstract double speedFactor();
 }
+
+
 
 
 
