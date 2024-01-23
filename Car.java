@@ -55,12 +55,16 @@ public abstract class Car implements Movable {
     public abstract void decrementSpeed(double amount);
 
     public void gas(double amount) {
-        incrementSpeed(amount);
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount) {
+        if (amount >=0 && amount <= 1) {
         decrementSpeed(amount);
+        }
     }
 
     protected int getNrDoors() {
