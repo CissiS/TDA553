@@ -2,27 +2,25 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
     //gemensamma attribut
-    protected int nrDoors;
-    protected double enginePower;
+    private int nrDoors;
+    private double enginePower;
     protected double currentSpeed;
-    protected Color color;
+    private Color color;
     protected String modelName;
-    protected double gas;
-    protected double brake;
-    protected double currentDirection; //Bilen åker rakt fram från början (i positiv y-riktning) ska den det??
+
+    private double currentDirection;
     protected Point position;
 
     protected abstract double speedFactor();
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, Point position) {
+    public Car(int nrDoors, double enginePower, Color color, double currentSpeed, String modelName, Point position) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.currentDirection = 90;
         this.position = position;
-        this.gas = 0;
-        this.brake = 0;
+        this.currentSpeed = currentSpeed;
     }
 
     public void move() {
@@ -58,12 +56,17 @@ public abstract class Car implements Movable {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
+        else {
+            System.out.println("Felaktig gas input");
+        }
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount) {
         if (amount >=0 && amount <= 1) {
         decrementSpeed(amount);
+        }
+        else {
+            System.out.println("Felaktig brake input");
         }
     }
 

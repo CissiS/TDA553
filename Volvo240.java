@@ -6,16 +6,17 @@ public class Volvo240 extends Car {
 
 
     public Volvo240(){
-        super(4,100, Color.black, "Volvo240", new Point(0,0));
+        super(4,100, Color.black,0, "Volvo240", new Point(0,0));
         stopEngine();
     }
 
+    @Override
     public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+        return getEnginePower() * 0.01 * trimFactor;
     }
 
     public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
     }
 
     public void decrementSpeed(double amount){
