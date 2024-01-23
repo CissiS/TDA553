@@ -26,6 +26,16 @@ class Saab95Test {
         double newSpeed = mySaab.getCurrentSpeed();
         assertEquals((initialSpeed)*1.3, newSpeed);
     }
+    @org.junit.jupiter.api.Test
+    public void testGasWithInvalidValues() {
+        Saab95 mySaab = new Saab95();
+        mySaab.startEngine();
+        mySaab.gas(1.5);
+        assertEquals(0.1, mySaab.getCurrentSpeed());
+
+        mySaab.gas(-0.5);
+        assertEquals(0.1, mySaab.getCurrentSpeed());
+    }
 
     @org.junit.jupiter.api.Test
     void incrementSpeed() {
