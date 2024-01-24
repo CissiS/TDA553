@@ -1,3 +1,7 @@
+import javax.swing.text.Position;
+
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class Volvo240Test {
@@ -18,7 +22,15 @@ class Volvo240Test {
         double newDirection = myVolvo.getCurrentDirection();
         assertEquals((initialDirection + 90) % 360, newDirection);
     }
+    @org.junit.jupiter.api.Test
+    void move() {
+        Volvo240 myVolvo = new Volvo240();
+        myVolvo.startEngine();
+        myVolvo.gas(1);
+        myVolvo.move();
 
+        assertEquals(new Point(0,1), myVolvo.position);
+    }
     @org.junit.jupiter.api.Test
     void turnRight() {
         Volvo240 myVolvo = new Volvo240();

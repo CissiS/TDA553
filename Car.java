@@ -57,7 +57,7 @@ public abstract class Car implements Movable {
             incrementSpeed(amount);
         }
         else {
-            System.out.println("Felaktig gas input");
+            throw new IllegalArgumentException("Wrong gas input: ");
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class Car implements Movable {
         decrementSpeed(amount);
         }
         else {
-            System.out.println("Felaktig brake input");
+            throw new IllegalArgumentException("Wrong brake input: ");
         }
     }
 
