@@ -30,35 +30,6 @@ public abstract class Car implements Movable {
         return close;
     }
 
-
-    public int getNrDoors() {
-        return nrDoors;
-    }
-
-    public double getEnginePower() {
-        return enginePower;
-    }
-
-    protected double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    protected Color getColor() {
-        return color;
-    }
-
-    protected void setColor(Color clr) {
-        color = clr;
-    }
-
-    public void startEngine() {
-        currentSpeed = 0.1;
-    }
-
-    public void stopEngine() {
-        currentSpeed = 0;
-    }
-
     public abstract void incrementSpeed(double amount);
     public abstract void decrementSpeed(double amount);
 
@@ -71,6 +42,7 @@ public abstract class Car implements Movable {
         position.x += (int) deltaX;
         position.y += (int) deltaY;
     }
+    
     public void turnLeft() {
         //Turn Upwards
         currentDirection += 90;
@@ -105,6 +77,33 @@ public abstract class Car implements Movable {
         else {
             throw new IllegalArgumentException("Wrong brake input: ");
         }
+            public int getNrDoors() {
+        return nrDoors;
+    }
+
+    public double getEnginePower() {
+        return enginePower;
+    }
+
+    protected double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    protected Color getColor() {
+        return color;
+    }
+
+    protected void setColor(Color clr) {
+        color = clr;
+    }
+
+    public void startEngine() {
+        currentSpeed = 0.1;
+    }
+
+    public void stopEngine() {
+        currentSpeed = 0;
+    }
 
     }
 }
