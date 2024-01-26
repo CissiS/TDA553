@@ -22,6 +22,14 @@ public abstract class Car implements Movable {
 
     }
 
+        public boolean isCarClose(Car car) {
+        System.out.println("This car's position: " + this.position);
+        System.out.println("Other car's position: " + car.position);
+        boolean close = (Math.abs(car.position.x - this.position.x) <= 1 && Math.abs(car.position.y - this.position.y) <= 1);
+        System.out.println("Is the other car close? " + close);
+        return close;
+    }
+
 
     public int getNrDoors() {
         return nrDoors;
