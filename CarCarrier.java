@@ -1,16 +1,18 @@
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CarCarrier extends Car implements Carrier{
     protected double platformAngle;
     private static final double max_platformAngle = 70;
     private static final double min_platformAngle = 0;
-    public ArrayList<Car> cars;
+    public Deque<Car> cars;
 
     public CarCarrier(){
         super(2,300, Color.cyan, "CarCarrier");
-        cars = new ArrayList<>();
+        cars = new ArrayDeque<>();
         platformAngle = max_platformAngle;
         stopEngine();
     }
