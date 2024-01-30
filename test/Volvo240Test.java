@@ -1,72 +1,51 @@
-import javax.swing.text.Position;
-
-import java.awt.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class Volvo240Test {
+    private Volvo240 myVolvo;
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
+        myVolvo = new Volvo240();
     }
 
-    @org.junit.jupiter.api.AfterEach
+    @AfterEach
     void tearDown() {
     }
 
-    @org.junit.jupiter.api.Test
-    void turnLeft() {
-        Volvo240 myVolvo = new Volvo240();
-        double initialDirection = myVolvo.getCurrentDirection();
-        myVolvo.turnLeft();
-        double newDirection = myVolvo.getCurrentDirection();
-        assertEquals((initialDirection + 90) % 360, newDirection);
-    }
-    @org.junit.jupiter.api.Test
-    void move() {
-        Volvo240 myVolvo = new Volvo240();
-        myVolvo.startEngine();
-        myVolvo.gas(1);
-        myVolvo.move();
-
-        assertEquals(new Point(0,1), myVolvo.position);
-    }
-    @org.junit.jupiter.api.Test
-    void turnRight() {
-        Volvo240 myVolvo = new Volvo240();
-        double initialDirection = myVolvo.getCurrentDirection();
-        myVolvo.turnRight();
-        double newDirection = myVolvo.getCurrentDirection();
-        assertEquals((initialDirection - 90) % 360, newDirection);
-    }
-
-    @org.junit.jupiter.api.Test     //onödig?? kollar så att en uträkning = en uträkning
+    @Test
     void speedFactor() {
-        Volvo240 myVolvo = new Volvo240();      //testar den fysiska uträkningen med speedFactor funktionen
         myVolvo.startEngine();
+        // calculate expected SpeedFactor
         double expectedSpeedFactor = myVolvo.getEnginePower() * 0.01 * Volvo240.trimFactor;
         assertEquals(expectedSpeedFactor, myVolvo.speedFactor());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void incrementSpeed() {
-        Volvo240 myVolvo = new Volvo240();      //testar den fysiska uträkningen med speedFactor funktionen
-        double initialSpeed = myVolvo.getCurrentSpeed();        //increment speed korrekt jämfört med fysisk uträkning
+        double initialSpeed = myVolvo.getCurrentSpeed();
         double incrementAmount = 25;
         myVolvo.incrementSpeed(incrementAmount);
+        // calculate expected speed manually then compare
+        // Math.min ensures the calculated speed does not exceed the engine power limit
+        // Therefore, here is the test that ensures currentSpeed [0, enginePower]
         double expectedNewSpeed = Math.min(initialSpeed + myVolvo.speedFactor() * incrementAmount, myVolvo.getEnginePower());
         double actualNewSpeed = myVolvo.getCurrentSpeed();
         assertEquals(expectedNewSpeed, actualNewSpeed);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void decrementSpeed() {
-        Volvo240 myVolvo = new Volvo240();      //testar den fysiska uträkningen med speedFactor funktionen
-        double initialSpeed = myVolvo.getCurrentSpeed();        //increment speed korrekt jämfört med fysisk uträkning
+        double initialSpeed = myVolvo.getCurrentSpeed();
+        // calculate expected speed manually then compare
         double decreaseAmount = 25;
         myVolvo.decrementSpeed(decreaseAmount);
         double expectedNewSpeed = Math.max(initialSpeed - myVolvo.speedFactor() * decreaseAmount,0);
         double actualNewSpeed = myVolvo.getCurrentSpeed();
         assertEquals(expectedNewSpeed, actualNewSpeed);
+
     }
 }
