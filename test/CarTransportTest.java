@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Nested
-class CarCarrierTest {
-    private CarCarrier carcarrier;
+class CarTransportTest {
+    private CarTransport carcarrier;
     private Volvo240 volvo240;
     private Saab95 saab95;
 
     @BeforeEach
     void setUp() {
-        carcarrier = new CarCarrier();
+        carcarrier = new CarTransport();
         volvo240 = new Volvo240();
         saab95 =new Saab95();
     }
@@ -64,7 +64,7 @@ class CarCarrierTest {
     @Test
     void maxLoadTest(){
         carcarrier.lowerRamp();
-        for (int i = 0; i < CarCarrier.maxLoad; i++) {
+        for (int i = 0; i < CarTransport.maxLoad; i++) {
             carcarrier.loadCar(saab95);
         }
 

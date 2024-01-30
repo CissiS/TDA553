@@ -36,6 +36,11 @@ class ScaniaTest {
         myscania.raise(3);
         assertEquals(70, myscania.getTrailerAngle());
 
+        // Check that ramp can't rise when car is moving
+        myscania.incrementSpeed(50);
+        // We expect that an Exception occurs when we try to rise the ramp while moving
+        assertThrows(IllegalArgumentException.class, () -> myscania.raise(1));
+
     }
 
     @Test

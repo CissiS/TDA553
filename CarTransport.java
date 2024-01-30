@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.concurrent.CopyOnWriteArraySet;
 
-public class CarCarrier extends Car implements Carrier{
+public class CarTransport extends Car implements CarTransportHandler{
     protected double platformAngle;
     protected static int maxLoad = 8;
 
@@ -12,7 +10,7 @@ public class CarCarrier extends Car implements Carrier{
     private static final double min_platformAngle = 0;
     public Deque<Car> cars;
 
-    public CarCarrier(){
+    public CarTransport(){
         super(2,300, Color.cyan, "CarCarrier");
         cars = new ArrayDeque<>();
         platformAngle = max_platformAngle;
@@ -64,7 +62,8 @@ public class CarCarrier extends Car implements Carrier{
 
     @Override
     public void loadCar(Car car) {
-        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarCarrier) && cars.size() < maxLoad) {
+        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarTransport) && cars.size() < maxLoad) {
+            // CarTransports can not be loaded on any instance of CarTransport
             cars.add(car);
         } else {
             throw new IllegalStateException("Car not in position, ramp not lowered or it's a CarCarrier: ");

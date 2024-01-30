@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
 public class Workshop <model extends Car> {
+    // Parametrisk polymorfism, specificera vilken typ av bilar Workshop kan hantera
+    // E.g. specify that 'type' is a subtype from 'Volvo'
+    // A workshop that only can handle Volvo is Workshop<VolvoCar>
     private ArrayList<model> cars;
     private int capacity;
 
@@ -9,8 +12,11 @@ public class Workshop <model extends Car> {
         this.cars = new ArrayList<>();
     }
 
-    public void addCar(model car) {      //vill man att alla utom en bilsort ska va me får man lägga till logik här
-    if (cars.size() < capacity) {       // typ att workshop tar in "Car" men man throwar illegalargument om bil = carcarrier
+    public void addCar(model car) {
+    if (cars.size() < capacity) {
+        // Is it the valid car type?
+        // Will also exceed if the workshop takes all cars
+        // Or if the car is an instance of the accepted type
         cars.add(car);
     }
     else {

@@ -1,4 +1,4 @@
-public interface Carrier {
+public interface CarTransportHandler {
     void loadCar(Car car);
     void unloadCar();
 
