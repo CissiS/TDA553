@@ -6,6 +6,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CarCarrier extends Car implements Carrier{
     protected double platformAngle;
+    protected static int maxLoad = 8;
+
     private static final double max_platformAngle = 70;
     private static final double min_platformAngle = 0;
     public Deque<Car> cars;
@@ -28,7 +30,7 @@ public class CarCarrier extends Car implements Carrier{
 
     @Override
     public void gas(double amount) {
-        if (amount >= 0 && amount <= 1 && platformAngle == 0) {
+        if (amount >= 0 && amount <= 1 && platformAngle == max_platformAngle) {
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Gas input either too high or too low, or trailer angle not 0: ");
@@ -62,7 +64,7 @@ public class CarCarrier extends Car implements Carrier{
 
     @Override
     public void loadCar(Car car) {
-        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarCarrier)) {
+        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarCarrier) && cars.size() < maxLoad) {
             cars.add(car);
         } else {
             throw new IllegalArgumentException("Car not in position, ramp not lowered or it's a CarCarrier: ");

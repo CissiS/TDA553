@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Car {
+public class Scania extends Car implements Trailer {
 
     private double trailerAngle;
     private static final double max_platformAngle = 70;
@@ -17,32 +17,19 @@ public class Scania extends Car {
             throw new IllegalArgumentException("Gas input either too high or too low, or trailer angle not 0: ");
         }
     }
-    protected void incrementAngle(double amount) {
-        trailerAngle = trailerAngle + amount;
-    }
 
-    protected void decrementAngle(double amount) {
-        trailerAngle = trailerAngle - amount;
-    }
-
-    public void liftTrailer(double amount) {
-        if ((trailerAngle + amount) <= max_platformAngle && (currentSpeed == 0)) {
-            incrementAngle(amount);
+    public void raise(double amount) {
+        if (currentSpeed == 0) {
+            trailerAngle= Math.min(trailerAngle+amount, max_platformAngle);
         }
         else {
-            throw new IllegalArgumentException("Max angle reached or truck might be moving: ");
+            throw new IllegalArgumentException("Truck might be moving: ");
         }
     }
 
-    public void lowerTrailer(double amount) {
-        if (trailerAngle - amount >= min_platformAngle) {
-            decrementAngle(amount);
-        }
-        else {
-            throw new IllegalArgumentException("Min angle reached: ");
-        }
+    public void lower(double amount) {
+            trailerAngle = Math.max(trailerAngle - amount, min_platformAngle);
     }
-
 
     @Override
     public double speedFactor() {
@@ -56,5 +43,8 @@ public class Scania extends Car {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+    public double getTrailerAngle() {
+        return trailerAngle;
+    }
 }
 

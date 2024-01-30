@@ -1,16 +1,15 @@
 import java.util.ArrayList;
 
-public abstract class Workshop<type extends Car> {
-    private ArrayList<type> cars;
+public class Workshop <model extends Car> {
+    private ArrayList<model> cars;
     private int capacity;
-
 
     public Workshop(int capacity) {
         this.capacity = capacity;
         this.cars = new ArrayList<>();
     }
 
-    public void addCar(type car) {      //vill man att alla utom en bilsort ska va me får man lägga till logik här
+    public void addCar(model car) {      //vill man att alla utom en bilsort ska va me får man lägga till logik här
     if (cars.size() < capacity) {       // typ att workshop tar in "Car" men man throwar illegalargument om bil = carcarrier
         cars.add(car);
     }
@@ -19,7 +18,7 @@ public abstract class Workshop<type extends Car> {
     }
     }
 
-    public void removeCar(type car) {
+    public void removeCar(model car) {
         if (cars.contains(car)) {
             cars.remove(car);
         }
@@ -28,4 +27,7 @@ public abstract class Workshop<type extends Car> {
         }
     }
 
+    public ArrayList<model> getCars() {
+        return cars;
+    }
 }

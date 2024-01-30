@@ -71,6 +71,7 @@ public abstract class Car implements Movable {
             throw new IllegalArgumentException("Wrong brake input: ");
         }
     }
+
     public int getNrDoors() {
         return nrDoors;
     }
@@ -100,7 +101,7 @@ public abstract class Car implements Movable {
     }
 
     }
-}
+
 
 
 
