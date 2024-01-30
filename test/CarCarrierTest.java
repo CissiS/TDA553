@@ -56,6 +56,7 @@ class CarCarrierTest {
 
     @Test
     void unloadCar() {
+        carcarrier.lowerRamp();
         carcarrier.loadCar(volvo240);
         assertDoesNotThrow(carcarrier::unloadCar); // No Exception while unloading
         assertEquals(0, carcarrier.cars.size()); // No car on transport

@@ -67,7 +67,7 @@ public class CarCarrier extends Car implements Carrier{
         if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarCarrier) && cars.size() < maxLoad) {
             cars.add(car);
         } else {
-            throw new IllegalArgumentException("Car not in position, ramp not lowered or it's a CarCarrier: ");
+            throw new IllegalStateException("Car not in position, ramp not lowered or it's a CarCarrier: ");
         }
     }
 
