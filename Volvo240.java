@@ -5,8 +5,7 @@ public class Volvo240 extends Car {
 
 
     public Volvo240() {
-        super(4, 100, "Volvo240");
-        setColor(Color.black);
+        super(4, 100, Color.black,"Volvo240");
     }
 
     protected double speedFactor() {

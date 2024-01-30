@@ -2,7 +2,9 @@ import java.awt.*;
 
 public class Scania extends Car {
 
-    protected double trailerAngle;
+    private double trailerAngle;
+    private static final double max_platformAngle = 70;
+    private static final double min_platformAngle = 0;
     public Scania() {
         super(2,250, Color.pink, "Scania");
     }
@@ -24,7 +26,7 @@ public class Scania extends Car {
     }
 
     public void liftTrailer(double amount) {
-        if ((trailerAngle + amount) <= 70 && (currentSpeed == 0)) {
+        if ((trailerAngle + amount) <= max_platformAngle && (currentSpeed == 0)) {
             incrementAngle(amount);
         }
         else {
@@ -33,7 +35,7 @@ public class Scania extends Car {
     }
 
     public void lowerTrailer(double amount) {
-        if (trailerAngle - amount >= 0) {
+        if (trailerAngle - amount >= min_platformAngle) {
             decrementAngle(amount);
         }
         else {

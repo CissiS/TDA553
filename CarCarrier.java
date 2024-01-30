@@ -16,6 +16,7 @@ public class CarCarrier extends Car implements Carrier{
         platformAngle = max_platformAngle;
         stopEngine();
     }
+
     @Override
     public void move() {
         super.move();
@@ -61,10 +62,10 @@ public class CarCarrier extends Car implements Carrier{
 
     @Override
     public void loadCar(Car car) {
-        if (isCarClose(car) && platformAngle == min_platformAngle && car.modelName != "CarCarrier") {
+        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarCarrier)) {
             cars.add(car);
         } else {
-            throw new IllegalArgumentException("Car not in position or ramp not lowered: ");
+            throw new IllegalArgumentException("Car not in position, ramp not lowered or it's a CarCarrier: ");
         }
     }
 

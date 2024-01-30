@@ -11,23 +11,17 @@ public abstract class Car implements Movable {
 
 
 
-    public Car(int nrDoors, double enginePower, String modelName) {
+    public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.currentSpeed = 0;
         this.modelName = modelName;
         this.position = new Point(0,0);
         this.currentDirection = 90;
         stopEngine();
-
     }
 
-        public boolean isCarClose(Car car) {
-        System.out.println("This car's position: " + this.position);
-        System.out.println("Other car's position: " + car.position);
-        boolean close = (Math.abs(car.position.x - this.position.x) <= 1 && Math.abs(car.position.y - this.position.y) <= 1);
-        System.out.println("Is the other car close? " + close);
-        return close;
+    public boolean isCarCloseTo(Car car) {
+        return (Math.abs(car.position.x - this.position.x) <= 1 && Math.abs(car.position.y - this.position.y) <= 1);
     }
 
     public abstract void incrementSpeed(double amount);
@@ -70,14 +64,14 @@ public abstract class Car implements Movable {
             throw new IllegalArgumentException("Wrong gas input: ");
         }
     }
-    public void brake(double amount){
+    public void brake(double amount) {
         if (amount >= 0 && amount <= 1) {
             decrementSpeed(amount);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Wrong brake input: ");
         }
-            public int getNrDoors() {
+    }
+    public int getNrDoors() {
         return nrDoors;
     }
 
