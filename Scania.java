@@ -6,7 +6,7 @@ public class Scania extends Car implements Trailer {
     private static final double max_platformAngle = 70;
     private static final double min_platformAngle = 0;
     public Scania() {
-        super(2,250, Color.pink, "Scania");
+        super(2,250, Color.pink, "Scania", 4);
     }
 
     @Override

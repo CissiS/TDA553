@@ -11,7 +11,7 @@ public class CarTransport extends Car implements CarTransportHandler{
     public Deque<Car> cars;
 
     public CarTransport(){
-        super(2,300, Color.cyan, "CarCarrier");
+        super(2,300, Color.cyan, "CarCarrier", 6);
         cars = new ArrayDeque<>();
         platformAngle = max_platformAngle;
         stopEngine();
@@ -62,7 +62,7 @@ public class CarTransport extends Car implements CarTransportHandler{
 
     @Override
     public void loadCar(Car car) {
-        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarTransport) && cars.size() < maxLoad) {
+        if (isCarCloseTo(car) && platformAngle == min_platformAngle && !(car instanceof CarTransport) && cars.size() < maxLoad && car.getlenght() <= 2) {
             // CarTransports can not be loaded on any instance of CarTransport
             cars.add(car);
         } else {

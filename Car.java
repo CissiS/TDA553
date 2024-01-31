@@ -8,15 +8,17 @@ public abstract class Car implements Movable {
     protected String modelName;
     protected Point position;
     private double currentDirection;
+    private int length;
 
 
-
-    public Car(int nrDoors, double enginePower, Color color, String modelName) {
+    public Car(int nrDoors, double enginePower, Color color, String modelName, int length) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
+        this.color = color;
         this.modelName = modelName;
-        this.position = new Point(0,0);
+        this.position = new Point(0, 0);
         this.currentDirection = 90;
+        this.length = length;
         stopEngine();
     }
 
@@ -25,6 +27,7 @@ public abstract class Car implements Movable {
     }
 
     public abstract void incrementSpeed(double amount);
+
     public abstract void decrementSpeed(double amount);
 
     protected abstract double speedFactor();
@@ -36,34 +39,36 @@ public abstract class Car implements Movable {
         position.x += (int) deltaX;
         position.y += (int) deltaY;
     }
-    
+
     public void turnLeft() {
         //Turn Upwards
         currentDirection += 90;
-        if (currentDirection >= 360){
+        if (currentDirection >= 360) {
             currentDirection -= 360;
         }
     }
+
     public void turnRight() {
         //Turn Downwards
-        currentDirection -=90;
-        if (currentDirection < 0){
+        currentDirection -= 90;
+        if (currentDirection < 0) {
             currentDirection += 360;
         }
 
     }
-    protected double getCurrentDirection(){
+
+    protected double getCurrentDirection() {
         return currentDirection;
     }
 
     public void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Wrong gas input: ");
         }
     }
+
     public void brake(double amount) {
         if (amount >= 0 && amount <= 1) {
             decrementSpeed(amount);
@@ -100,7 +105,10 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
+    public int getlenght() {
+        return length;
     }
+}
 
 
 
