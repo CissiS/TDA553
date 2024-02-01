@@ -17,14 +17,13 @@ public class CarTransport extends Truck implements CarTransportHandler{
     }
 
     public void setRampToExtreme(boolean raise) {
-        double amount = 5;
         if (raise) {
             while (this.getRampAngle() < this.getMaxRampAngle()) {
-                raise(amount);
+                this.raise(this.getMaxRampAngle() - this.getRampAngle());
             }
         } else {
             while (this.getRampAngle() > this.getMinRampAngle()) {
-                lower(amount);
+                this.lower(this.getRampAngle());
             }
         }
     }
