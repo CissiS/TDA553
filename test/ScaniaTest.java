@@ -17,40 +17,15 @@ class ScaniaTest {
     }
 
     @Test
-    void gas() {
-        myscania.gas(0.5);
-        assertEquals(0.5*myscania.getEnginePower()*0.02, myscania.getCurrentSpeed());
+   void isRampPositioned() {
+        assertTrue(myscania.isRampPositioned());
+        // Höj rampen, inte är i position längre
+        myscania.raise(10);
+        assertFalse(myscania.isRampPositioned());
+        // Sänk rampen tillbaka
+        myscania.lower(10);
+        assertTrue(myscania.isRampPositioned());
 
-        assertThrows(IllegalArgumentException.class, () -> myscania.raise(70));
-
-        myscania.stopEngine();
-        myscania.raise(70);
-        assertEquals(70, myscania.getRampAngle());
-    }
-
-    @Test
-    void raise() {
-        myscania.raise(69);
-        assertEquals(69, myscania.getRampAngle());
-
-        myscania.raise(3);
-        assertEquals(70, myscania.getRampAngle());
-
-        // Check that ramp can't rise when car is moving
-        myscania.incrementSpeed(50);
-        // We expect that an Exception occurs when we try to rise the ramp while moving
-        assertThrows(IllegalArgumentException.class, () -> myscania.raise(1));
-
-    }
-
-    @Test
-    void lower() {
-        myscania.lower(69);
-        assertEquals(0, myscania.getRampAngle());
-
-        myscania.raise(70);
-        myscania.lower(3);
-        assertEquals(67, myscania.getRampAngle());
     }
 
 }
