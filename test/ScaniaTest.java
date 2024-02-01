@@ -25,16 +25,16 @@ class ScaniaTest {
 
         myscania.stopEngine();
         myscania.raise(70);
-        assertEquals(70, myscania.getTrailerAngle());
+        assertEquals(70, myscania.getRampAngle());
     }
 
     @Test
     void raise() {
         myscania.raise(69);
-        assertEquals(69, myscania.getTrailerAngle());
+        assertEquals(69, myscania.getRampAngle());
 
         myscania.raise(3);
-        assertEquals(70, myscania.getTrailerAngle());
+        assertEquals(70, myscania.getRampAngle());
 
         // Check that ramp can't rise when car is moving
         myscania.incrementSpeed(50);
@@ -46,11 +46,11 @@ class ScaniaTest {
     @Test
     void lower() {
         myscania.lower(69);
-        assertEquals(0, myscania.getTrailerAngle());
+        assertEquals(0, myscania.getRampAngle());
 
         myscania.raise(70);
         myscania.lower(3);
-        assertEquals(67, myscania.getTrailerAngle());
+        assertEquals(67, myscania.getRampAngle());
     }
 
 }

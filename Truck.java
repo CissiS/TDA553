@@ -3,8 +3,8 @@ public abstract class Truck extends Vehicle implements Ramp {
     //Common attributes
     private final int nrDoors;
     private double rampAngle;
-    private double minRampAngle;
-    private double maxRampAngle;
+    private final double minRampAngle = 0;
+    private final double maxRampAngle = 70;
 
     public Truck (int nrDoors, double enginePower, Color color, String modelName, int length) {
         super(enginePower, color, modelName, length);
@@ -15,6 +15,7 @@ public abstract class Truck extends Vehicle implements Ramp {
     public void gas(double amount) {
         if (this.isRampPositioned()) {
             super.gas(amount);
+            //isRampPositioned();
         } else {
             throw new IllegalArgumentException("Gas input either too high or too low, or trailer angle not right: ");
         }
@@ -22,7 +23,8 @@ public abstract class Truck extends Vehicle implements Ramp {
 
     @Override
     public void raise (double amount){
-        if (rampAngle + amount <= minRampAngle) {
+        // Anropar raise till max maxvinkeln, men bara om bilen står stilla
+        if (getCurrentSpeed() == 0 && rampAngle + amount <= maxRampAngle) {
             rampAngle = Math.min(rampAngle + amount, maxRampAngle);
         } else {
             throw new IllegalArgumentException("Ramp in position or vehicle is moving: ");

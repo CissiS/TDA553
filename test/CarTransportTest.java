@@ -44,26 +44,26 @@ class CarTransportTest {
     }
 
     @Test
-    void lowerRamp() {
+    void lower() {
     }
 
     @Test
     void loadCar() {
-        carcarrier.lowerRamp();
+        // carcarrier.lower();
         assertDoesNotThrow(() -> carcarrier.loadCar(volvo240)); // Will throw an Exception if Ramp is not lowered
         assertEquals(1, carcarrier.cars.size()); // One car has been loaded
     }
 
     @Test
     void unloadCar() {
-        carcarrier.lowerRamp();
+        // carcarrier.lowerRamp();
         carcarrier.loadCar(volvo240);
         assertDoesNotThrow(carcarrier::unloadCar); // No Exception while unloading
         assertEquals(0, carcarrier.cars.size()); // No car on transport
     }
     @Test
     void maxLoadTest(){
-        carcarrier.lowerRamp();
+        //carcarrier.lowerRamp();
         for (int i = 0; i < CarTransport.maxLoad; i++) {
             carcarrier.loadCar(saab95);
         }
