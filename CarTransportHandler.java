@@ -1,7 +1,4 @@
-public interface CarTransportHandler {
+public interface CarTransportHandler extends Ramp {
     void loadCar(Car car);
     void unloadCar();
-
-    void raiseRamp();
-    void lowerRamp();
 }

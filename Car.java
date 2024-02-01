@@ -1,113 +1,18 @@
 import java.awt.*;
-public abstract class Car implements Movable {
+public abstract class Car extends Vehicle{
     //Common attributes
     private final int nrDoors;
-    private final double enginePower;
-    protected double currentSpeed;
-    private Color color;
-    protected String modelName;
-    protected Point position;
-    private double currentDirection;
-    private int length;
 
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, int length) {
+    public Car (int nrDoors, double enginePower, Color color, String modelName, int length) {
+        super(enginePower, color, modelName, length);
         this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.color = color;
-        this.modelName = modelName;
-        this.position = new Point(0, 0);
-        this.currentDirection = 90;
-        this.length = length;
-        stopEngine();
-    }
-
-    public boolean isCarCloseTo(Car car) {
-        return (Math.abs(car.position.x - this.position.x) <= 1 && Math.abs(car.position.y - this.position.y) <= 1);
-    }
-
-    public abstract void incrementSpeed(double amount);
-
-    public abstract void decrementSpeed(double amount);
-
-    protected abstract double speedFactor();
-
-    public void move() {
-        double deltaX = currentSpeed * Math.cos(Math.toRadians(currentDirection));
-        double deltaY = currentSpeed * Math.sin(Math.toRadians(currentDirection));
-
-        position.x += (int) deltaX;
-        position.y += (int) deltaY;
-    }
-
-    public void turnLeft() {
-        //Turn Upwards
-        currentDirection += 90;
-        if (currentDirection >= 360) {
-            currentDirection -= 360;
-        }
-    }
-
-    public void turnRight() {
-        //Turn Downwards
-        currentDirection -= 90;
-        if (currentDirection < 0) {
-            currentDirection += 360;
-        }
-
-    }
-
-    protected double getCurrentDirection() {
-        return currentDirection;
-    }
-
-    public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            incrementSpeed(amount);
-        } else {
-            throw new IllegalArgumentException("Wrong gas input: ");
-        }
-    }
-
-    public void brake(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
-        } else {
-            throw new IllegalArgumentException("Wrong brake input: ");
-        }
     }
 
     public int getNrDoors() {
         return nrDoors;
     }
 
-    public double getEnginePower() {
-        return enginePower;
-    }
-
-    protected double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    protected Color getColor() {
-        return color;
-    }
-
-    protected void setColor(Color clr) {
-        color = clr;
-    }
-
-    public void startEngine() {
-        currentSpeed = 0.1;
-    }
-
-    public void stopEngine() {
-        currentSpeed = 0;
-    }
-
-    public int getlenght() {
-        return length;
-    }
 }
 
 
