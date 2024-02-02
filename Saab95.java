@@ -18,9 +18,9 @@ public class Saab95 extends Car {
         return this.getEnginePower() * 0.01 * turbo;
     }
 
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
+    // public void incrementSpeed(double amount){
+      //  currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    //}
 
     public void decrementSpeed(double amount){
         // The speed should not be below 0?
