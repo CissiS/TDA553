@@ -18,7 +18,6 @@ class TruckTest {
 
     @Test
     void gas() {
-
         myscania.gas(0.5);
         assertEquals(0.5*myscania.getEnginePower()*0.02, myscania.getCurrentSpeed());
 
@@ -29,18 +28,17 @@ class TruckTest {
     @Test
     void raise() {
         // System.out.println("Rampvinkel: " + truck.getRampAngle());
-        //System.out.println("Hastighet: " + truck.getCurrentSpeed());
+        // System.out.println("Hastighet: " + truck.getCurrentSpeed());
         myscania.raise(69);
         assertEquals(69, myscania.getRampAngle());
-        System.out.println("Rampvinkel: " + myscania.getRampAngle());
-        System.out.println("Hastighet: " + myscania.getCurrentSpeed());
+        // System.out.println("Rampvinkel: " + myscania.getRampAngle());
+        // System.out.println("Hastighet: " + myscania.getCurrentSpeed());
 
         assertThrows(IllegalArgumentException.class, ()->myscania.raise(3));
 
         // Check that ramp can't rise when car is moving
-        myscania.incrementSpeed(50);
         // We expect that an Exception occurs when we try to rise the ramp while moving
-        assertThrows(IllegalArgumentException.class, () -> myscania.raise(1));
+        assertThrows(IllegalArgumentException.class, () -> myscania.gas(1));
 
     }
 

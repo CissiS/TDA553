@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Nested
@@ -23,28 +25,21 @@ class CarTransportTest {
     }
 
     @Test
-    void move() {
-    }
-
-    @Test
-    void gas() {
-    }
-
-    @Test
-    void incrementAngle() {
-    }
-
-    @Test
-    void decrementAngle() {
-    }
-
-    @Test
     void raiseRamp() {
         // Kan vara värt att testa ramperna likt i Scania här med
     }
 
     @Test
     void lower() {
+    }
+
+    @Test
+    void isCarCloseTo() {
+        Car mycar= new Volvo240();
+        CarTransport mycarrier = new CarTransport();
+        mycar.position = new Point(2,2);
+        mycarrier.position =new Point (0,0);
+        assertFalse(mycarrier.isCarCloseTo(mycar));
     }
 
     @Test

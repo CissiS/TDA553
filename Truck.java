@@ -54,13 +54,6 @@ public abstract class Truck extends Vehicle implements Ramp {
         return nrDoors;
     }
 
-    public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
-    }
-    public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
     public double getMaxRampAngle() {
         return maxRampAngle;
     }

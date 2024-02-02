@@ -5,7 +5,7 @@ public class Workshop <model extends Car> {
     // E.g. specify that 'type' is a subtype from 'Volvo'
     // A workshop that only can handle Volvo is Workshop<VolvoCar>
     private ArrayList<model> cars;
-    private int capacity;
+    private final int capacity;
 
     public Workshop(int capacity) {
         this.capacity = capacity;
