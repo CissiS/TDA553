@@ -36,7 +36,10 @@ public abstract class Vehicle implements Movable {
         }
     } ;
 
-    public abstract void decrementSpeed(double amount);
+    public void decrementSpeed(double amount){
+        // The speed should not be below 0?
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
 
     protected abstract double speedFactor();
 

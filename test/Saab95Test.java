@@ -32,7 +32,7 @@ class Saab95Test {
         double incrementAmount = 25;
         while (mySaab.getCurrentSpeed() < incrementAmount) {
             mySaab.gas(1);
-            System.out.println(mySaab.getCurrentSpeed());
+            //System.out.println(mySaab.getCurrentSpeed());
         };
 
         // calculate expected speed manually then compare
