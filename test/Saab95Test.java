@@ -54,28 +54,34 @@ class Saab95Test {
         assertEquals(expectedNewSpeed, actualNewSpeed);
     }
 
-   // @Test
-//    void setTurboOn() {
-//        //To compare speed with turbo on vs off
-//        mySaab.setTurboOff();
-//        // Increase speed without turbo
-//        double speedWithoutTurbo = mySaab.getCurrentSpeed();
-//        //System.out.println("Speed at start: " + mySaab.getCurrentSpeed());
-//        mySaab.incrementSpeed(50);
-//        // System.out.println("Speed without Turbo: " + mySaab.getCurrentSpeed());
-//
-//        // Turbo ON
-//        mySaab.setTurboOn();
-//
-//        // Increase speed with turbo
-//        double speedWithTurbo = mySaab.getCurrentSpeed();
-//        mySaab.incrementSpeed(50);
-//        //System.out.println("Speed with Turbo: " + mySaab.getCurrentSpeed());
-//
-//        // Compare speed with and without turbo
-//        assertTrue(speedWithTurbo < mySaab.getCurrentSpeed());
-//        assertTrue(speedWithoutTurbo < mySaab.getCurrentSpeed());
-//    }
+    @Test
+    void setTurboOn() {
+        //To compare speed with turbo on vs off
+        mySaab.setTurboOff();
+        // Increase speed without turbo
+        double speedWithoutTurbo = mySaab.getCurrentSpeed();
+        //System.out.println("Speed at start: " + mySaab.getCurrentSpeed());
+        double incrementAmount = 50;
+        while (mySaab.getCurrentSpeed() < incrementAmount) {
+            mySaab.gas(1);
+            //System.out.println(mySaab.getCurrentSpeed());
+        };
+        // System.out.println("Speed without Turbo: " + mySaab.getCurrentSpeed());
+
+        // Turbo ON
+        mySaab.setTurboOn();
+        // Increase speed with turbo
+        double speedWithTurbo = mySaab.getCurrentSpeed();
+        while (mySaab.getCurrentSpeed() < incrementAmount+50) {
+            mySaab.gas(1);
+            //System.out.println(mySaab.getCurrentSpeed());
+        };
+        //System.out.println("Speed with Turbo: " + mySaab.getCurrentSpeed());
+
+        // Compare speed with and without turbo
+        assertTrue(speedWithTurbo < mySaab.getCurrentSpeed());
+        assertTrue(speedWithoutTurbo < mySaab.getCurrentSpeed());
+    }
 
 
     @Test
