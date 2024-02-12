@@ -84,6 +84,11 @@ public class CarView extends JFrame{
             }
         });
 
+        turboOnButton.addActionListener(e -> carC.setTurboOn());
+        turboOffButton.addActionListener(e -> carC.setTurboOff());
+        //liftBedButton.addActionListener(e -> carC.raise(amount));
+       // lowerBedButton.addActionListener(e -> carC.lower(amount));
+
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
