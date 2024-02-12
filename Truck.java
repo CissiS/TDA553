@@ -6,9 +6,10 @@ public abstract class Truck extends Vehicle implements Ramp {
     private final double minRampAngle = 0;
     private final double maxRampAngle = 70;
 
-    public Truck (int nrDoors, double enginePower, Color color, String modelName, int length) {
-        super(enginePower, color, modelName, length);
+    public Truck (int nrDoors, double enginePower, Color color, String modelName, int length, Point position) {
+        super(enginePower, color, modelName, length, position);
         this.nrDoors = nrDoors;
+        this.position = position;
     }
 
     @Override

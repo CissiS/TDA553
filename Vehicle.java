@@ -10,11 +10,11 @@ public abstract class Vehicle implements Movable {
     private final int length;
 
 
-    public Vehicle(double enginePower, Color color, String modelName, int length) {
+    public Vehicle(double enginePower, Color color, String modelName, int length, Point position) {
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.position = new Point(0, 0);
+        this.position = position;
         this.currentDirection = 90;
         this.length = length;
         stopEngine();
@@ -115,6 +115,28 @@ public abstract class Vehicle implements Movable {
     public int getlength() {
         return length;
     }
+
+    public Point getPosition () {
+        return position;
+    }
+    public String getModelName(){
+        return modelName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Vehicle vehicle = (Vehicle) obj;
+        return modelName.equals(vehicle.modelName);
+    }
+
+    @Override
+    public int hashCode() {
+        return modelName.hashCode();
+    }
+
+
 }
 
 
