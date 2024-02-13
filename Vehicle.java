@@ -136,7 +136,6 @@ public abstract class Vehicle implements Movable {
         return modelName.hashCode();
     }
 
-
 }
 
 

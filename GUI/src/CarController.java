@@ -48,7 +48,7 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : Vehicles) {
                 vehicle.move();
-                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 800 || vehicle.getPosition().y > 800 || vehicle.getPosition().y < 0;
+                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 500 || vehicle.getPosition().y > 600 || vehicle.getPosition().y < 0;
                 if (atEdge) {
                     vehicle.turnLeft();
                     vehicle.turnLeft();
@@ -92,7 +92,7 @@ public class CarController {
                 ((Scania) vehicle).lower(amount);
             }
         }
-    }     
+    }
 
     // Calls the gas method for each car once
     public void gas(int amount) {
@@ -110,6 +110,18 @@ public class CarController {
                 ) {
             vehicle.brake(brake);
             System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
+        }
+    }
+
+    public void stopAllCars() {
+        for (Vehicle vehicle : Vehicles) {
+            vehicle.stopEngine();
+        }
+    }
+
+    public void startAllCars() {
+        for (Vehicle vehicle : Vehicles) {
+            vehicle.startEngine();
         }
     }
 }
