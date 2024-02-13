@@ -1,3 +1,5 @@
+package GUI.src;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,9 +10,16 @@ import java.util.ArrayList;
  * It's responsibilities is to listen to the View and responds in a appropriate manner by
  * modifying the model state and the updating the view.
  */
+/* Cissi Notes
+    vi vill koppla knapparna till bilen
+    vill man bryta ner till en egen klass med Buttons?
+    knapparna i sig kan man då ha namn på eller liknande så
+    slipper man ha de i carview
+ */
 
 public class CarController {
     // member fields:
+    // Används för att uppdatera bilsimuleringen
 
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -49,6 +58,7 @@ public class CarController {
             for (Vehicle vehicle : Vehicles) {
                 vehicle.move();
                 boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 800 || vehicle.getPosition().y > 800 || vehicle.getPosition().y < 0;
+                // fordonet ska inte köra in i väggen
                 if (atEdge) {
                     vehicle.turnLeft();
                     vehicle.turnLeft();
