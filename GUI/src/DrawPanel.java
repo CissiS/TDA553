@@ -20,7 +20,7 @@ public class DrawPanel extends JPanel{
         this.loadImages();
         }
 
-public void loadImages(){
+public void loadImages(){       //använd endast modelname och kolla så de samma typ på de sättet.
         // Print an error message in case file is not found with a try/catch block
         try {
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
