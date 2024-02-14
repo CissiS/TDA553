@@ -40,4 +40,5 @@ public class Workshop <model extends Car> {
         return cars;
     }
     public Point getWorkshopPosition() {return position;}
+
 }

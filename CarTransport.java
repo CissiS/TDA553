@@ -7,7 +7,7 @@ public class CarTransport extends Truck implements CarTransportHandler{
     public Deque<Car> cars;
 
     public CarTransport(){
-        super(2,300, Color.cyan, "CarCarrier", 6, new Point(0,0));
+        super(2,300, Color.cyan, "CarCarrier", 6);
         cars = new ArrayDeque<>();
         stopEngine();
     }

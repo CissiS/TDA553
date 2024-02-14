@@ -30,10 +30,17 @@ public class CarController {
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+        Volvo240 volvo = new Volvo240();
+        volvo.setPosition(new Point(0,0));
+         cc.vehicles.add(volvo);
+        // ändra position här!!!!
+         Saab95 saab = new Saab95();
+         saab.setPosition(new Point(200,0));
+         cc.vehicles.add(saab);
 
-         cc.vehicles.add(new Volvo240());
-         cc.vehicles.add(new Saab95());
-         cc.vehicles.add(new Scania());
+        Scania scania = new Scania();
+        scania.setPosition(new Point(400,0));
+         cc.vehicles.add(scania);
 
          cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -86,8 +93,11 @@ public class CarController {
     public void addCar(Vehicle vehicle) {
         if (vehicle.getPosition().getX() == volvoWorkshop.getWorkshopPosition().getX() &&
                 vehicle.getPosition().getY() == volvoWorkshop.getWorkshopPosition().getY()) {
-            volvoWorkshop.addCar((Volvo240) vehicle);
-            System.out.println(vehicle.getModelName() + " added to workshop");
+            if (!volvoWorkshop.getCars().contains((Volvo240) vehicle)) {
+                volvoWorkshop.addCar((Volvo240) vehicle);
+                vehicle.stopEngine();
+                System.out.println(vehicle.getModelName() + " added to workshop");
+            }
         }
     }
 
@@ -120,7 +130,7 @@ public class CarController {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : vehicles
                 ) {
-            vehicle.gas(gas);
+                vehicle.gas(gas);
             System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
         }
     }
