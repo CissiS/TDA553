@@ -90,13 +90,23 @@ public class CarController {
         }
     }
 
+    //Metod för att kika om Bilarna krockar med Workshops
+    public double calculatePosition(Point point1, Point point2){
+        double dx = point2.getX()-point1.getX();
+        double dy = point2.getY()-point1.getY();
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+
     public void addCar(Vehicle vehicle) {
-        if (vehicle.getPosition().getX() == volvoWorkshop.getWorkshopPosition().getX() &&
-                vehicle.getPosition().getY() == volvoWorkshop.getWorkshopPosition().getY()) {
-            if (!volvoWorkshop.getCars().contains((Volvo240) vehicle)) {
-                volvoWorkshop.addCar((Volvo240) vehicle);
-                vehicle.stopEngine();
-                System.out.println(vehicle.getModelName() + " added to workshop");
+        double distance = calculatePosition(vehicle.getPosition(), volvoWorkshop.getWorkshopPosition());
+        final double COLLISION_DISTANCE_THRESHOLD = 20.0; // kanske ska flyttas ut till workshop eller nån annanstans
+        if (distance < COLLISION_DISTANCE_THRESHOLD){
+            if (vehicle instanceof Volvo240){
+                if (!volvoWorkshop.getCars().contains((Volvo240) vehicle)) {
+                    volvoWorkshop.addCar((Volvo240) vehicle);
+                    vehicle.stopEngine();
+                    System.out.println(vehicle.getModelName() + " added to workshop");
+                }
             }
         }
     }
