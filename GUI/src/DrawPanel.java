@@ -12,12 +12,13 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
     public ArrayList<CarImage> carImages = new ArrayList<>();
+    BufferedImage volvoWorkshopImage;
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.cyan);
         this.loadImages();
         }
 
@@ -34,12 +35,12 @@ public void loadImages(){
 
             BufferedImage scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
             carImages.add(new CarImage(new Scania(), scaniaImage, new Point(400,0)));
-            //volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+
+            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -47,8 +48,10 @@ public void loadImages(){
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
         for (CarImage carImage : carImages) {
-            g.drawImage(carImage.image, carImage.position.x, carImage.position.y, null);
+                g.drawImage(carImage.image, carImage.position.x, carImage.position.y, null);g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+
         }
     }
 
@@ -77,7 +80,7 @@ public void loadImages(){
     // Just a single image, TODO: Generalize
 
     //BufferedImage volvoWorkshopImage;
-    //Point volvoWorkshopPoint = new Point(300,300);
+    public Point volvoWorkshopPoint = new Point(0,300);
 
     // TODO: Make this general for all cars
 

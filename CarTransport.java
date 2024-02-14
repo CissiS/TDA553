@@ -29,6 +29,24 @@ public class CarTransport extends Truck implements CarTransportHandler{
     }
 
     @Override
+    public void raise(double amount) {
+        if (this.isRampPositioned()) {
+            setRampToExtreme(true);
+        } else {
+            throw new IllegalArgumentException("CarTransport moving");
+        }
+    }
+
+    @Override
+    public void lower(double amount) {
+        if (this.isRampPositioned()) {
+            setRampToExtreme(false);
+        } else {
+            throw new IllegalArgumentException("CarTransport moving");
+        }
+    }
+
+    @Override
     public boolean isRampPositioned() {
         return this.getRampAngle() == this.getMaxRampAngle();
     }
