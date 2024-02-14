@@ -81,15 +81,6 @@ public class CarController {
         }
     }
 
-    public void checkForCollision() {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Volvo240)
-                if (vehicle.getPosition().equals(volvoWorkshop.getWorkshopPosition())) {
-                volvoWorkshop.addCar((Volvo240) vehicle);
-            }
-        }
-    }
-
     //Metod för att kika om Bilarna krockar med Workshops
     public double calculatePosition(Point point1, Point point2){
         double dx = point2.getX()-point1.getX();
