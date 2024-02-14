@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,17 +23,17 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Vehicle> Vehicles = new ArrayList<>();
-
+    public ArrayList<Vehicle> vehicles = new ArrayList<>();
+    public Workshop<Volvo240>  volvoWorkshop = new Workshop<Volvo240>(5, new Point(0,300));
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
-         cc.Vehicles.add(new Volvo240());
-         cc.Vehicles.add(new Saab95());
-         cc.Vehicles.add(new Scania());
+         cc.vehicles.add(new Volvo240());
+         cc.vehicles.add(new Saab95());
+         cc.vehicles.add(new Scania());
 
          cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -46,9 +47,9 @@ public class CarController {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : Vehicles) {
+            for (Vehicle vehicle : vehicles) {
                 vehicle.move();
-                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 500 || vehicle.getPosition().y > 600 || vehicle.getPosition().y < 0;
+                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 700 || vehicle.getPosition().y > 500 || vehicle.getPosition().y < 0;
                 if (atEdge) {
                     vehicle.turnLeft();
                     vehicle.turnLeft();
@@ -59,19 +60,39 @@ public class CarController {
                 frame.drawPanel.moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                addCar(vehicle);
             }
         }
     }
+
+
     public void setTurboOn() {
-        for (Vehicle vehicle : Vehicles)
+        for (Vehicle vehicle : vehicles)
         { if (vehicle instanceof Saab95) {
             ((Saab95) vehicle).setTurboOn();
             }
         }
     }
 
+    public void checkForCollision() {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle instanceof Volvo240)
+                if (vehicle.getPosition().equals(volvoWorkshop.getWorkshopPosition())) {
+                volvoWorkshop.addCar((Volvo240) vehicle);
+            }
+        }
+    }
+
+    public void addCar(Vehicle vehicle) {
+        if (vehicle.getPosition().getX() == volvoWorkshop.getWorkshopPosition().getX() &&
+                vehicle.getPosition().getY() == volvoWorkshop.getWorkshopPosition().getY()) {
+            volvoWorkshop.addCar((Volvo240) vehicle);
+            System.out.println(vehicle.getModelName() + " added to workshop");
+        }
+    }
+
      public void setTurboOff() {
-         for (Vehicle vehicle : Vehicles) {
+         for (Vehicle vehicle : vehicles) {
              if (vehicle instanceof Saab95) {
                  ((Saab95) vehicle).setTurboOff();
              }
@@ -79,7 +100,7 @@ public class CarController {
      }
 
      public void raise(int amount) {
-        for (Vehicle vehicle : Vehicles) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Scania) {
                 ((Scania) vehicle).raise(amount);
             }
@@ -87,7 +108,7 @@ public class CarController {
     }
 
     public void lower(int amount) {
-        for (Vehicle vehicle : Vehicles) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Scania) {
                 ((Scania) vehicle).lower(amount);
             }
@@ -97,7 +118,7 @@ public class CarController {
     // Calls the gas method for each car once
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : Vehicles
+        for (Vehicle vehicle : vehicles
                 ) {
             vehicle.gas(gas);
             System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
@@ -106,7 +127,7 @@ public class CarController {
 
     public void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : Vehicles
+        for (Vehicle vehicle : vehicles
                 ) {
             vehicle.brake(brake);
             System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
@@ -114,13 +135,13 @@ public class CarController {
     }
 
     public void stopAllCars() {
-        for (Vehicle vehicle : Vehicles) {
+        for (Vehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
     }
 
     public void startAllCars() {
-        for (Vehicle vehicle : Vehicles) {
+        for (Vehicle vehicle : vehicles) {
             vehicle.startEngine();
         }
     }

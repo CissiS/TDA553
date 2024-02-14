@@ -12,7 +12,6 @@ public class DrawPanel extends JPanel{
     public ArrayList<CarImage> carImages = new ArrayList<>();
     BufferedImage volvoWorkshopImage;
 
-
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -49,7 +48,7 @@ public void loadImages(){
         super.paintComponent(g);
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
         for (CarImage carImage : carImages) {
-            g.drawImage(carImage.image, carImage.position.x, carImage.position.y, null);g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+                g.drawImage(carImage.image, carImage.position.x, carImage.position.y, null);g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
 
         }
     }
@@ -79,7 +78,7 @@ public void loadImages(){
     // Just a single image, TODO: Generalize
 
     //BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    public Point volvoWorkshopPoint = new Point(0,300);
 
     // TODO: Make this general for all cars
 
