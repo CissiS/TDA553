@@ -20,25 +20,12 @@ public abstract class Vehicle implements Movable {
         stopEngine();
     }
 
-    private void incrementSpeed(double amount){
-        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
+    public void incrementSpeed(double amount) {
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
     }
 
-    public void setCurrentSpeed(double currentSpeed){
-        if (currentSpeed >= 0 && currentSpeed <= enginePower) {
-            this.currentSpeed = currentSpeed;
-            // Speed can't be negative
-        } else if (currentSpeed < 0) {
-            this.currentSpeed = 0;
-            // Speed can't be higher than enginePower
-        } else if (currentSpeed > enginePower){
-            this.currentSpeed = enginePower;
-        }
-    } ;
-
-    public void decrementSpeed(double amount){
-        // The speed should not be below 0?
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    public void decrementSpeed(double amount) {
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
     protected abstract double speedFactor();

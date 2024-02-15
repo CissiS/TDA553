@@ -88,32 +88,10 @@ public class DrawPanel extends JPanel {
 
     // Just a single image, TODO: Generalize
 
-    public Point volvoWorkshopPoint = new Point(0,300);
+    Point volvoWorkshopPoint = new Point(0, 300);
 
     // TODO: Make this general for all cars
 
 
 }
-/*
-public void loadImages(){       //använd endast modelname och kolla så de samma typ på de sättet.
-    // Print an error message in case file is not found with a try/catch block
-    try {
-        // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-        // if you are starting in IntelliJ.
-        BufferedImage volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-        carImages.add(new CarImage(new Volvo240(), volvoImage, new Point(0,0)));
 
-        BufferedImage saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
-        carImages.add(new CarImage(new Saab95(), saabImage, new Point(200,0)));
-
-        BufferedImage scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-        carImages.add(new CarImage(new Scania(), scaniaImage, new Point(400,0)));
-
-        volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
-    } catch (IOException ex)
-    {
-        ex.printStackTrace();
-    }
-}
-
- */
