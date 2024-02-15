@@ -16,11 +16,11 @@ Typ involvera CarTransportHandler till Workshop och sen CarController till den.
 Titta på Single Responsibility Principle (SRP) eller Liskov Substitution Principle (LSP),
 * CarView SRP, den hanterar väldigt mycket. Det kanske räcker med att den visar bilar så kan Buttons vara en egen klass.
 * CarView ISP, då inga klienter bör tvingas att bero på metoder som de inte använder, ex knappar för turbo funkar bara för Saab.
-* CarController DIP, eftersom det finns beoende mellan CarController och Workshop, se ovan.
+* CarController DIP, eftersom det finns beroende mellan CarController och Workshop, se ovan.
 * CarController SRP, om man vill att hastighetsfunktionerna ska delas upp vidare.
-* DrawPanel SRP, både ladda bilar, hantera bilrintning och positioner.
-* DrawPanel DIP, beroende av specifika bilimplementeringar eftersom den skapar instanser av klasser när den laddar bilderna. Kanske göra ett interface.
-* Draw Panel har låg sammanhållning då den hanterar flera orelaterade uppgifter, ger hög koppling mellan interna delar.
+* CarController DIP, beroende av specifika bilimplementeringar. Kanske göra ett interface eller annan struktur.
+* DrawPanel SRP, både ladda bilar, hantera bilriktning och positioner.
+* DrawPanel har låg sammanhållning då den hanterar flera orelaterade uppgifter, ger hög koppling mellan interna delar.
 _________________________________________________________________
 Uppgift 3: Ansvarsområden
 Analysera era klasser med avseende på Separation of Concern (SoC) och Single Responsibility Principle (SRP).
@@ -34,22 +34,48 @@ CarController
 Har ansvar för att styra bilen, uppdatera och interagera med DrawPanel och CarView
 Den har anledning att förändras om vi vill ändra uppdateringsmekanismen eller
 ändra på hur bilen styrs.
-* Kan dekomponeras genom att skapa en klass som hanterar uppdatering och en klass som hanterar styrning.
+* Kan dekomponeras genom att skapa en klass som hanterar uppdatering och en klass som hanterar styrning.(CarMotionManager)
 * Flytta ut main från CarController till en egen klass CarSimulator.
 
 
 CarView
 Har koll på UI och delegerar händelser till CarController
 Den har anledning att förändras om vi vill ändra på hur UI ser ut eller dess komponenter
-* Kan dekomponeras genom att skapa en klass som hanterar UI och en klass som hanterar händelser.
+* Kan dekomponeras genom att skapa en klass som hanterar händelser.
 * En klass som hanterar Buttons.
 * (ska man verkligen se alla knappar om man har en volvo etc?)
 
 DrawPanel
 Har ansvar för att rita bilen
 Den har anledning att förändras om vi vill ändra på hur bilen ritas
-  * Kan dekomponeras genom att skapa en klass som hanterar ritning för ett visst objekt
+ * Kan dekomponeras genom att skapa en klass som hanterar ritning för ett visst objekt
     och en klass som hanterar ritning av ett annat objekt separat.
-  * MVC = Model View Controller, denna följer inte denna namngivning.
+ * MVC = Model View Controller, denna följer inte denna namngivning.
 _________________________________________________________________
 Uppgift 4:
+Motivera, i termer av de principer vi gått igenom, varför era förbättringar verkligen är förbättringar.
+* CarController (DIP) är inte längre beroende av Workshop utan utnyttjar istället interfacet vi redan har CarTransportHandler.
+* CarController (SRP) är nedbruten till CarMotionManager som hanterar styrning.
+* Flyttat ut main från CarController till Simulator (SRP).
+* Simulator har i sin tur koppling till Factory som är beroende av bilarna så vi slipper kopplingen från CarController till varje bil var för sig. (DIP)
+
+* Döpt om enligt MVC modellen så vi har en CarModel som är kopplat till Vehicle istället för DrawPanel.
+* CarView är då kopplad till CarModel och inte DrawPanel.
+* CarView är vidare uppdelad i en klass för Buttons och EventHandler. (SRP) och (DIP)
+
+Refaktoriseringsplan:
+    1. Flytta ut main från CarController till Simulator.
+    2. Låt Simulator gå till Factory som i sin tur är beroende av de olika bilmodellerna
+    3. Döp om enligt MVC modellen med en CarModel som är kopplat till Vehicle istället för DrawPanel.
+    4. Bryt ut CarMotionManager från CarController
+    5. Bryt ut Buttons och EventHandler från CarView.
+    6. Låt CarController ta tillvara på CarTransportHandlerInterfacet för att addCar i Workshop
+
+Finns det några delar av planen som går att utföra parallellt, av olika utvecklare som arbetar oberoende av varandra?
+Om inte, finns det något sätt att omformulera planen så att en sådan arbetsdelning är möjlig?
+Följande delar kan man arbeta på parallellt:
+    1.  Flyttandet av main till Simulator
+    2.  Använder Factory för att skapa bilmodellerna, sen behöver man integrera den med Simulator klassen
+    men man kan börja med att anpassa den till bilarna.
+    3.  Bryta ut CarMotionManager
+    4.  Bryta ut Buttons och EventHandler
