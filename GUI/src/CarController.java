@@ -32,7 +32,8 @@ public class CarController {
         CarController cc = new CarController();
         Volvo240 volvo = new Volvo240();
         volvo.setPosition(new Point(0,0));
-         cc.vehicles.add(volvo);
+        cc.vehicles.add(volvo);
+
         // ändra position här!!!!
          Saab95 saab = new Saab95();
          saab.setPosition(new Point(200,0));
@@ -42,7 +43,11 @@ public class CarController {
         scania.setPosition(new Point(400,0));
          cc.vehicles.add(scania);
 
-         cc.frame = new CarView("CarSim 1.0", cc);
+
+        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame.drawPanel.setVehicles(cc.vehicles);
+        cc.frame.drawPanel.getWorkshopImage();
+
 
         // Start the timer
         cc.timer.start();
