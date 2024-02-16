@@ -2,7 +2,7 @@ Uppgift 2: Beroenden
 Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
 - Vilka beroenden är nödvändiga?
 Vehicle och dess underklasser nödvändiga
-Rampen är ett bra exempel här på när man följer DIP
+Rampen är ett bra exempel här på när man följer DIP?????
 
 - Vilka klasser är beroende av varandra som inte borde vara det?
 (CarController är beroende av WorkShop?)
@@ -15,9 +15,9 @@ Typ involvera CarTransportHandler till Workshop och sen CarController till den.
 - Kan ni identifiera några brott mot övriga designprinciper vi pratat om i kursen?
 Titta på Single Responsibility Principle (SRP) eller Liskov Substitution Principle (LSP),
 * CarView SRP, den hanterar väldigt mycket. Det kanske räcker med att den visar bilar så kan Buttons vara en egen klass.
-* CarView ISP, då inga klienter bör tvingas att bero på metoder som de inte använder, ex knappar för turbo funkar bara för Saab.
+* CarView LSP, då inga klienter bör tvingas att bero på metoder som de inte använder, ex knappar för turbo funkar bara för Saab.
 * CarController DIP, eftersom det finns beroende mellan CarController och Workshop, se ovan.
-* CarController SRP, om man vill att hastighetsfunktionerna ska delas upp vidare.
+// CarController SRP, om man vill att hastighetsfunktionerna ska delas upp vidare.
 * CarController DIP, beroende av specifika bilimplementeringar. Kanske göra ett interface eller annan struktur.
 * DrawPanel SRP, både ladda bilar, hantera bilriktning och positioner.
 * DrawPanel har låg sammanhållning då den hanterar flera orelaterade uppgifter, ger hög koppling mellan interna delar.

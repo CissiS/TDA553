@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Truck implements Ramp {
+public class Scania extends Truck{
 
     public Scania() {
         super(2,100, Color.pink, "Scania", 4);
