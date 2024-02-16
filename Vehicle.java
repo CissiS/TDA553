@@ -9,6 +9,8 @@ public abstract class Vehicle implements Movable {
     private double currentDirection;
     private final int length;
 
+    public boolean engineState;
+
 
     public Vehicle(double enginePower, Color color, String modelName, int length) {
         this.enginePower = enginePower;
@@ -55,12 +57,13 @@ public abstract class Vehicle implements Movable {
 
     }
 
+
     protected double getCurrentDirection() {
         return currentDirection;
     }
 
     public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
+        if (amount >= 0 && amount <= 1 && engineState) {
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Wrong gas input: ");
@@ -93,10 +96,12 @@ public abstract class Vehicle implements Movable {
 
     public void startEngine() {
         currentSpeed = 0.1;
+        engineState = true;
     }
 
     public void stopEngine() {
         currentSpeed = 0;
+        engineState = false;
     }
 
     public int getlength() {

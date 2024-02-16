@@ -13,7 +13,7 @@ public abstract class Truck extends Vehicle implements Ramp {
 
     @Override
     public void gas(double amount) {
-        if (this.isRampPositioned()) {
+        if (this.isRampPositioned() && engineState) {
             super.gas(amount);
             //isRampPositioned();
         } else {
