@@ -64,7 +64,7 @@ Motivera, i termer av de principer vi gått igenom, varför era förbättringar 
 * CarView är vidare uppdelad i en klass för Buttons och EventHandler. (SRP) och (DIP)
 
 Refaktoriseringsplan:
-    1. Flytta ut main från CarController till Simulator.
+    1. Flytta ut main från CarController till Simulator. ((KLAR))
     2. Låt Simulator gå till Factory som i sin tur är beroende av de olika bilmodellerna
     3. Döp om enligt MVC modellen med en CarModel som är kopplat till Vehicle istället för DrawPanel.
     4. Bryt ut CarMotionManager från CarController

@@ -17,41 +17,15 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    public Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
+    ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+    Workshop<Volvo240> volvoWorkshop = new Workshop(5, new Point(0,300));
     // A list of cars, modify if needed
-    public ArrayList<Vehicle> vehicles = new ArrayList<>();
-    public Workshop<Volvo240>  volvoWorkshop = new Workshop<Volvo240>(5, new Point(0,300));
+
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-        Volvo240 volvo = new Volvo240();
-        volvo.setPosition(new Point(0,0));
-        cc.vehicles.add(volvo);
-
-        // ändra position här!!!!
-         Saab95 saab = new Saab95();
-         saab.setPosition(new Point(200,0));
-         cc.vehicles.add(saab);
-
-        Scania scania = new Scania();
-        scania.setPosition(new Point(400,0));
-         cc.vehicles.add(scania);
-
-
-        cc.frame = new CarView("CarSim 1.0", cc);
-        cc.frame.drawPanel.setVehicles(cc.vehicles);
-        cc.frame.drawPanel.getWorkshopImage();
-
-
-        // Start the timer
-        cc.timer.start();
-    }
-
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
