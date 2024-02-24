@@ -19,20 +19,63 @@ public class CarController {
     // each step between delays.
     public Timer timer = new Timer(delay, new TimerListener());
 
+    public CarMotionManager cmm;
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-    Workshop<Volvo240> volvoWorkshop = new Workshop(5, new Point(0,300));
-    // A list of cars, modify if needed
+    public CarController(CarMotionManager cmm) {
+        this.cmm = cmm;
+        this.frame = new CarView("CarSim 1.0", this);
+    }
+
 
     //methods:
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
+
+    public void gas(int amount) {
+        cmm.gas(amount);
+        System.out.println(" gassy: " + amount);
+
+    }
+
+    public void brake(int amount) {
+        cmm.brake(amount);
+    }
+    public void startAllCars() {
+        cmm.startAllCars();
+        System.out.println("All cars started");
+    }
+
+    public void stopAllCars() {
+        cmm.stopAllCars();
+    }
+
+    public void turboOn() {
+        cmm.setTurboOn();
+    }
+
+    public void turboOff() {
+        cmm.setTurboOff();
+    }
+
+    public void raise(int amount) {
+        cmm.raise(amount);
+    }
+
+    public void lower(int amount) {
+        cmm.lower(amount);
+    }
+
+    public void addCar(Vehicle vehicle) {
+        cmm.addCar(vehicle);
+    }
+
+    // This actionListener is for the timer.
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : vehicles) {
+            for (Vehicle vehicle : cmm.getVehicles()) {
                 vehicle.move();
                 boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 700 || vehicle.getPosition().y > 500 || vehicle.getPosition().y < 0;
                 if (atEdge) {
@@ -45,94 +88,10 @@ public class CarController {
                 frame.drawPanel.moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-                addCar(vehicle);
+                cmm.addCar(vehicle);
             }
         }
-    }
+    }}
 
 
 
-    public void setTurboOn() {
-        for (Vehicle vehicle : vehicles)
-        { if (vehicle instanceof Saab95) {
-            ((Saab95) vehicle).setTurboOn();
-            }
-        }
-    }
-
-    //Metod för att kika om Bilarna krockar med Workshops
-    public double calculatePosition(Point point1, Point point2){
-        double dx = point2.getX()-point1.getX();
-        double dy = point2.getY()-point1.getY();
-        return Math.sqrt(dx*dx + dy*dy);
-    }
-
-    public void addCar(Vehicle vehicle) {
-        double distance = calculatePosition(vehicle.getPosition(), volvoWorkshop.getWorkshopPosition());
-        final double COLLISION_DISTANCE_THRESHOLD = 20.0; // kanske ska flyttas ut till workshop eller nån annanstans
-        if (distance < COLLISION_DISTANCE_THRESHOLD){
-            if (vehicle instanceof Volvo240){
-                if (!volvoWorkshop.getCars().contains((Volvo240) vehicle)) {
-                    volvoWorkshop.addCar((Volvo240) vehicle);
-                    vehicle.stopEngine();
-                    System.out.println(vehicle.getModelName() + " added to workshop");
-                }
-            }
-        }
-    }
-
-     public void setTurboOff() {
-         for (Vehicle vehicle : vehicles) {
-             if (vehicle instanceof Saab95) {
-                 ((Saab95) vehicle).setTurboOff();
-             }
-         }
-     }
-
-     public void raise(int amount) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Scania) {
-                ((Scania) vehicle).raise(amount);
-            }
-        }
-    }
-
-    public void lower(int amount) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Scania) {
-                ((Scania) vehicle).lower(amount);
-            }
-        }
-    }
-
-    // Calls the gas method for each car once
-    public void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-                ) {
-                vehicle.gas(gas);
-            System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
-        }
-    }
-
-    public void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-                ) {
-            vehicle.brake(brake);
-            System.out.println(vehicle.getModelName() + " speed: " + vehicle.getCurrentSpeed() + " position: " + vehicle.getPosition());
-        }
-    }
-
-    public void stopAllCars() {
-        for (Vehicle vehicle : vehicles) {
-            vehicle.stopEngine();
-        }
-    }
-
-    public void startAllCars() {
-        for (Vehicle vehicle : vehicles) {
-            vehicle.startEngine();
-        }
-    }
-}
