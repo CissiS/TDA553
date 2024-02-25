@@ -4,7 +4,7 @@ import java.util.Deque;
 
 public class CarTransport extends Truck implements CarTransportHandler{
     protected static int maxLoad = 8;
-    public Deque<Car> cars;
+    public Deque<Vehicle> cars;
 
     public CarTransport(){
         super(2,300, Color.cyan, "CarCarrier", 6);
@@ -12,8 +12,8 @@ public class CarTransport extends Truck implements CarTransportHandler{
         stopEngine();
     }
 
-    public boolean isCarCloseTo(Car car) {
-        return (Math.abs(car.position.x - this.position.x) <= 1 && Math.abs(car.position.y - this.position.y) <= 1);
+    public boolean isCarCloseTo(Vehicle vehicle) {
+        return (Math.abs(vehicle.position.x - this.position.x) <= 1 && Math.abs(vehicle.position.y - this.position.y) <= 1);
     }
 
     public void setRampToExtreme(boolean raise) {
@@ -52,10 +52,10 @@ public class CarTransport extends Truck implements CarTransportHandler{
     }
 
     @Override
-    public void loadCar(Car car) {
-        if (isCarCloseTo(car) && this.getRampAngle() == this.getMinRampAngle()  && cars.size() < maxLoad && car.getlength() <= 2) {
+    public void loadCar(Vehicle vehicle) {
+        if (vehicle instanceof Car && isCarCloseTo(vehicle) && this.getRampAngle() == this.getMinRampAngle()  && cars.size() < maxLoad && vehicle.getlength() <= 2) {
             // CarTransports can not be loaded on any instance of CarTransport
-            cars.add(car);
+            cars.add(vehicle);
         } else {
             throw new IllegalStateException("Car not in position, ramp not lowered or it's a CarCarrier: ");
         }

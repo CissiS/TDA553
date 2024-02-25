@@ -36,8 +36,6 @@ public class CarController {
 
     public void gas(int amount) {
         cmm.gas(amount);
-        System.out.println(" gassy: " + amount);
-
     }
 
     public void brake(int amount) {
@@ -45,7 +43,6 @@ public class CarController {
     }
     public void startAllCars() {
         cmm.startAllCars();
-        System.out.println("All cars started");
     }
 
     public void stopAllCars() {
@@ -68,8 +65,8 @@ public class CarController {
         cmm.lower(amount);
     }
 
-    public void addCar(Vehicle vehicle) {
-        cmm.addCar(vehicle);
+    public void loadCar(Vehicle vehicle) {
+        cmm.loadCar(vehicle);
     }
 
     // This actionListener is for the timer.
@@ -88,7 +85,7 @@ public class CarController {
                 frame.drawPanel.moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-                cmm.addCar(vehicle);
+                cmm.loadCar(vehicle);
             }
         }
     }}

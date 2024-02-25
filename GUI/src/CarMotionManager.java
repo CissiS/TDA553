@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CarMotionManager {
+public class CarMotionManager implements CarTransportHandler {
     public ArrayList<Vehicle> vehicles;
     private Workshop<Volvo240> volvoWorkshop;
 
@@ -18,6 +18,7 @@ public class CarMotionManager {
         for (Vehicle vehicle : vehicles)
         { if (vehicle instanceof Saab95) {
             ((Saab95) vehicle).setTurboOn();
+            System.out.println(vehicle.getModelName() + " turbo on");
         }
         }
     }
@@ -29,7 +30,8 @@ public class CarMotionManager {
         return Math.sqrt(dx*dx + dy*dy);
     }
 
-    public void addCar(Vehicle vehicle) {
+    @Override
+    public void loadCar(Vehicle vehicle){
         double distance = calculatePosition(vehicle.getPosition(), volvoWorkshop.getWorkshopPosition());
         final double COLLISION_DISTANCE_THRESHOLD = 20.0; // kanske ska flyttas ut till workshop eller nån annanstans
         if (distance < COLLISION_DISTANCE_THRESHOLD){
@@ -43,15 +45,24 @@ public class CarMotionManager {
         }
     }
 
+    @Override           //fel just nu, behövde implementera men vi behöver ej den egentligen?
+    public void unloadCar(){
+           if (!volvoWorkshop.getCars().isEmpty()){
+               volvoWorkshop.getCars().getFirst().startEngine();
+           }
+    }
+
     public void setTurboOff() {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 ((Saab95) vehicle).setTurboOff();
+                System.out.println(vehicle.getModelName() + " turbo off");
             }
         }
     }
 
-    public void raise(int amount) {
+    @Override
+    public void raise(double amount) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Scania) {
                 ((Scania) vehicle).raise(amount);
@@ -59,7 +70,8 @@ public class CarMotionManager {
         }
     }
 
-    public void lower(int amount) {
+    @Override
+    public void lower(double amount) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Scania) {
                 ((Scania) vehicle).lower(amount);
@@ -102,6 +114,9 @@ public class CarMotionManager {
         return vehicles;
 }
 
+@Override           //fel just nu, behövde implementera
+    public boolean isRampPositioned() {
+        return calculatePosition(volvoWorkshop.getWorkshopPosition(), volvoWorkshop.getWorkshopPosition()) < 1;
+         }
 
-
-}
+        }

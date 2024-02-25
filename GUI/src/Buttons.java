@@ -47,25 +47,28 @@ public class Buttons {
         controlPanel.add(brakePanel);
         controlPanel.add(rampPanel);
         controlPanel.add(addCarButton);
+
+        turboOnButton.setPreferredSize(new Dimension(200,200));
         controlPanel.add(turboOnButton);
         controlPanel.add(turboOffButton);
         controlPanel.add(gasButton);
         controlPanel.add(brakeButton);
+        controlPanel.add(raiseButton);
+        controlPanel.add(lowerButton);
 
         controlPanel.setLayout(new GridLayout(2,4));
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.setPreferredSize(new Dimension((X), 200));
         controlPanel.setBackground(Color.CYAN);
 
 
         startAllButton.setBackground(Color.blue);
         startAllButton.setForeground(Color.green);
-        startAllButton.setPreferredSize(new Dimension(X/5-15,200));
+        startAllButton.setPreferredSize(new Dimension(X/4,200));
         controlPanel.add(startAllButton);
-
 
         stopAllButton.setBackground(Color.red);
         stopAllButton.setForeground(Color.black);
-        stopAllButton.setPreferredSize(new Dimension(X/5-15,200));
+        stopAllButton.setPreferredSize(new Dimension(X/4,200));
         controlPanel.add(stopAllButton);
     }
 
@@ -113,9 +116,11 @@ public class Buttons {
 
         turboOnButton.addActionListener(e -> carC.turboOn());
         turboOffButton.addActionListener(e -> carC.turboOff());
-        addCarButton.addActionListener(e -> carC.addCar(new Volvo240()));
+        addCarButton.addActionListener(e -> carC.loadCar(new Volvo240()));
         startAllButton.addActionListener(e -> carC.startAllCars());
         stopAllButton.addActionListener(e -> carC.stopAllCars());
+        raiseButton.addActionListener(e -> carC.raise(rampAngle));
+        lowerButton.addActionListener(e -> carC.lower(rampAngle));
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
