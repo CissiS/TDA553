@@ -116,7 +116,7 @@ public class Buttons {
 
         turboOnButton.addActionListener(e -> carC.turboOn());
         turboOffButton.addActionListener(e -> carC.turboOff());
-        addCarButton.addActionListener(e -> carC.loadCar(new Volvo240()));
+        addCarButton.addActionListener(e -> carC.generateRandomVehicle());
         startAllButton.addActionListener(e -> carC.startAllCars());
         stopAllButton.addActionListener(e -> carC.stopAllCars());
         raiseButton.addActionListener(e -> carC.raise(rampAngle));
