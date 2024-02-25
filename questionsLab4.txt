@@ -24,3 +24,24 @@ Vi skapade även en ny klass, Buttons, som hanterade knapparnas layout och infor
 Vi skapade även en ny klass, Simulator, som fungerade som mainfunktion.
 Den nya klassen CarModel skapas även då att skapa nya fordon är en del av modellens ansvar och inte Controllers.
 Logiken från main för att skapa fordon och ställa in deras positioner är flyttad till CarModel istället.
+_________________________________________________________________
+Question3:
+- Observer, Factory Method, State, Composite.
+För vart och ett av dessa fyra designmönster, svara på följande frågor:
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+- Vilka designproblem löste ni genom att använda det?
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+
+* Observer
+CarView observera CarController om förändringar i modellen som den behöver uppdatera sitt gränssnitt för.
+kanske carmodel kan dra nytta av, minskar beroenden med carcontroller
+* Factory Method
+Använder Factory Method-mönstret . Factory-klassen skapar olika typer av fordon baserat på givet namn genom att anropa Factory.createVehicle-metoden.
+
+* State
+lämpligt om vi har objekt som ändrar sitt beteende baserat på deras interna tillstånd,
+vilket inte verkar vara fallet nu
+
+* Composite.
+har med vehivle
