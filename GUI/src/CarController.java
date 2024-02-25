@@ -69,23 +69,24 @@ public class CarController {
         cmm.loadCar(vehicle);
     }
 
-    public void generateRandomVehicle() {
-        int randomNr = (int) (Math.random() * 3);
-        if (randomNr == 0) {
-            Factory.createVehicle("Volvo240", new Point(200, 0));
-            cmm.vehicles.add(Factory.createVehicle("Volvo240", new Point(200, 0)));
-            System.out.print("Volvo generated");
-        } else if (randomNr == 1) {
-            Factory.createVehicle("Saab95", new Point(500, 0));
-            cmm.vehicles.add(Factory.createVehicle("Saab95", new Point(500, 0)));
-            System.out.println("Saab generated");
-        }
-        else {
-            Factory.createVehicle("Scania", new Point(700, 0));
-            cmm.vehicles.add(Factory.createVehicle("Scania", new Point(700, 0)));
-            System.out.println("Scania generated");
-        }
-    }
+    //(borde vara i CarModel, se hur det blir med buttons då?)
+//    public void generateRandomVehicle() {
+//        int randomNr = (int) (Math.random() * 3);
+//        if (randomNr == 0) {
+//            Factory.createVehicle("Volvo240", new Point(200, 0));
+//            cmm.vehicles.add(Factory.createVehicle("Volvo240", new Point(200, 0)));
+//            System.out.print("Volvo generated");
+//        } else if (randomNr == 1) {
+//            Factory.createVehicle("Saab95", new Point(500, 0));
+//            cmm.vehicles.add(Factory.createVehicle("Saab95", new Point(500, 0)));
+//            System.out.println("Saab generated");
+//        }
+//        else {
+//            Factory.createVehicle("Scania", new Point(700, 0));
+//            cmm.vehicles.add(Factory.createVehicle("Scania", new Point(700, 0)));
+//            System.out.println("Scania generated");
+//        }
+//    }
 
     // This actionListener is for the timer.
     private class TimerListener implements ActionListener {
