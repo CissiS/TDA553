@@ -1,5 +1,7 @@
 import java.awt.*;
-public abstract class Vehicle implements Movable {
+import java.util.UUID;
+
+public abstract class Vehicle implements Movable, ImageInstance{
     //Common attributes
     private final double enginePower;
     protected double currentSpeed;
@@ -10,6 +12,7 @@ public abstract class Vehicle implements Movable {
     private final int length;
 
     public boolean engineState;
+    private String id;
 
 
     public Vehicle(double enginePower, Color color, String modelName, int length) {
@@ -19,6 +22,7 @@ public abstract class Vehicle implements Movable {
         this.position = new Point(0,0);
         this.currentDirection = 90;
         this.length = length;
+        this.id = UUID.randomUUID().toString();
         stopEngine();
     }
 
@@ -108,15 +112,27 @@ public abstract class Vehicle implements Movable {
         return length;
     }
 
-    public Point getPosition () {
-        return position;
+    protected void setPosition(Point position){
+        this.position = position;
     }
-    public String getModelName(){
+
+    @Override
+    public String getHashCode() {
+        return String.valueOf(this.hashCode());
+    }
+
+    @Override
+    public String getModelName() {
         return modelName;
     }
 
-    protected void setPosition(Point position){
-        this.position = position;
+    @Override
+    public Point getPosition() {
+        return position;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override

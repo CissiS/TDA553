@@ -70,23 +70,25 @@ public class CarController {
     }
 
     public void generateRandomVehicle() {
-        int randomNr = (int) (Math.random() * 3);
-        if (randomNr == 0) {
-            Factory.createVehicle("Volvo240", new Point(200, 0));
-            cmm.vehicles.add(Factory.createVehicle("Volvo240", new Point(200, 0)));
-            System.out.print("Volvo generated");
-        } else if (randomNr == 1) {
-            Factory.createVehicle("Saab95", new Point(500, 0));
-            cmm.vehicles.add(Factory.createVehicle("Saab95", new Point(500, 0)));
-            System.out.println("Saab generated");
-        }
-        else {
-            Factory.createVehicle("Scania", new Point(700, 0));
-            cmm.vehicles.add(Factory.createVehicle("Scania", new Point(700, 0)));
-            System.out.println("Scania generated");
+        if (cmm.vehicles.size() < 10) {
+            int randomNr = (int) (Math.random() * 3);
+            Vehicle newVehicle;
+            Point position = switch (randomNr) {
+                case 0 -> new Point(200, 0);
+                case 1 -> new Point(500, 0);
+                default -> new Point(700, 0);
+            };
+            String vehicleType = switch (randomNr) {
+                case 0 -> "Volvo240";
+                case 1 -> "Saab95";
+                default -> "Scania";
+            };
+            newVehicle = Factory.createVehicle(vehicleType, position);
+            cmm.vehicles.add(newVehicle);
+            frame.drawPanel.addVehicleImage(newVehicle);
+            System.out.println("Added " + newVehicle.getModelName());
         }
     }
-
     // This actionListener is for the timer.
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {

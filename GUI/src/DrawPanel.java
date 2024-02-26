@@ -24,7 +24,7 @@ public class DrawPanel extends JPanel {
         for (Vehicle vehicle : vehicles) {
             BufferedImage image = getImageForModel(vehicle.getModelName());
         if (image != null) {
-            carImages.add(new CarImage(vehicle.getModelName(), image, vehicle.getPosition()));
+            carImages.add(new CarImage(vehicle.getModelName(), image, vehicle.getPosition(), vehicle.getId()));
         }
     }
 }
@@ -65,7 +65,7 @@ public class DrawPanel extends JPanel {
 
     void moveit(int x, int y, Vehicle vehicle) {
         for (CarImage carImage : carImages) {
-            if (carImage.modelName.equals(vehicle.getModelName())) {
+            if (carImage.id.equals(vehicle.getId())) {
                 carImage.position.x = x;
                 carImage.position.y = y;
                 break;
@@ -73,14 +73,24 @@ public class DrawPanel extends JPanel {
         }
     }
 
+    public void addVehicleImage(Vehicle vehicle) {
+        BufferedImage image = getImageForModel(vehicle.getModelName());
+        if (image != null) {
+            carImages.add(new CarImage(vehicle.getModelName(), image, vehicle.getPosition(), vehicle.getId()));
+        }
+    }
+
     public class CarImage {
         String modelName;
         BufferedImage image;
         Point position;
-        public CarImage(String modelName, BufferedImage image, Point position){
+
+        String id;
+        public CarImage(String modelName, BufferedImage image, Point position, String id){
             this.modelName = modelName;
             this.image = image;
             this.position = position;
+            this.id = id;
         }
     }
 
