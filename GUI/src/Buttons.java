@@ -165,20 +165,6 @@ public class Buttons {
             }
         });
 
-        startAllButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.startAllCars();
-            }
-        });
-
-        stopAllButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.stopAllCars();
-            }
-        });
-
     }
 
     public JPanel getControlPanel() {

@@ -84,6 +84,7 @@ public class CarController {
         }
         cmm.vehicles.add(newVehicle);
         frame.drawPanel.addVehicleImage(newVehicle);
+        frame.drawPanel.repaint();
         for (Vehicle vehicle : cmm.vehicles) {
             System.out.println(vehicle.getId());
             System.out.println(cmm.vehicles.size());
