@@ -71,34 +71,34 @@ public class CarController {
 
     public void generateRandomVehicle() {
         int randomNr = (int) (Math.random() * 3);
-        Vehicle newVehicle;
-        if (randomNr == 0) {
-            newVehicle = Factory.createVehicle("Volvo240", new Point(200, 0));
-            System.out.print("Volvo generated");
-        } else if (randomNr == 1) {
-            newVehicle = Factory.createVehicle("Saab95", new Point(500, 0));
-            System.out.println("Saab generated");
-        } else {
-            newVehicle = Factory.createVehicle("Scania", new Point(700, 0));
-            System.out.println("Scania generated");
+        if (cmm.vehicles.size() < 10) {
+            Vehicle newVehicle;
+            if (randomNr == 0) {
+                newVehicle = Factory.createVehicle("Volvo240", new Point(300, 0));
+                System.out.print("Volvo generated");
+            } else if (randomNr == 1) {
+                newVehicle = Factory.createVehicle("Saab95", new Point(500, 0));
+                System.out.println("Saab generated");
+            } else {
+                newVehicle = Factory.createVehicle("Scania", new Point(700, 0));
+                System.out.println("Scania generated");
+            }
+            cmm.vehicles.add(newVehicle);
+            frame.drawPanel.addVehicleImage(newVehicle);
+            frame.drawPanel.repaint();
+                System.out.println(cmm.vehicles.size() + " vehicles left");
         }
-        cmm.vehicles.add(newVehicle);
-        frame.drawPanel.addVehicleImage(newVehicle);
-        frame.drawPanel.repaint();
-        for (Vehicle vehicle : cmm.vehicles) {
-            System.out.println(vehicle.getId());
-            System.out.println(cmm.vehicles.size());
-    }
     }
 
     public void removeRandomVehicle() {
-        if (cmm.vehicles.size() > 0) {
+        if (!cmm.vehicles.isEmpty()) {
             int randomNr = (int) (Math.random() * cmm.vehicles.size());
             Vehicle vehicle = cmm.vehicles.get(randomNr);
             cmm.vehicles.remove(vehicle);
             frame.drawPanel.removeVehicleImage(vehicle);
             frame.drawPanel.repaint();
-            System.out.println(cmm.vehicles.size());
+            System.out.println(vehicle.getModelName() + " removed");
+            System.out.println(cmm.vehicles.size() + " vehicles left");
         }
     }
     // This actionListener is for the timer.
