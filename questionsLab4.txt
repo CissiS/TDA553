@@ -33,15 +33,71 @@ För vart och ett av dessa fyra designmönster, svara på följande frågor:
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 
+
+
+
+* Factory method:
+
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+Ja, detta använder vi i facory klassen.
+
+- Vilka designproblem löste ni genom att använda det?
+Det har gjort så att vi med ett knapptryck kan skapa upp nya bilar.
+
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+Inte genom att använda det eftersom vi redan gör det men man hade kunnat lägga till en spinner eller liknande till add knapparna och med hjälp av värdena låta användaren
+bestämma vilket typ av bil som läggs till istället för att det är slump.
+
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+Då vi redan använder det.
+
+
 * Observer
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+Vi använder detta oavsiktligt i vår design. Vi har en klass som heter timelistener i CarController som har metoden actionPerformed.
+Detta används i buttons så när användaren trycker på en knapp som fångar den actionPerformed upp det.
+
+- Vilka designproblem löste ni genom att använda det?
+Så man kunde använda sig utav knapparna.
+
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+Nej inte för nuvarande.
+
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+Förnuvrande finns det inga mer områden i desginen då det behövs, det hade eventuellt varit för triviala saker som att få bilen att studsa mot rutan men att använda detta för det hade gjort saker och ting mer
+komplicerat än vad det behöver vara,
+
+
 CarView observera CarController om förändringar i modellen som den behöver uppdatera sitt gränssnitt för.
-kanske carmodel kan dra nytta av, minskar beroenden med carcontroller
-* Factory Method
-Använder Factory Method-mönstret . Factory-klassen skapar olika typer av fordon baserat på givet namn genom att anropa Factory.createVehicle-metoden.
+kanske carmodel kan dra nytta av, minskar beroenden med carcontroller ????????????????
+
+
 
 * State
-lämpligt om vi har objekt som ändrar sitt beteende baserat på deras interna tillstånd,
-vilket inte verkar vara fallet nu
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+Nej.
 
-* Composite.
-har med vehivle
+- Vilka designproblem löste ni genom att använda det?
+Vi har inte använt det.
+
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+Inte för nuvarande.
+
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+För nuvarande har vi inga designproblem som behöver lösas med hjälp av att använda state så finns ingen poäng att använda för tillfället.
+Hade varit lämpligt om vi hade objekt som ändrar sitt beteende baserat på deras interna tillstånd.
+
+
+
+* Composite
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+Vi använder detta oavsiktligt i vår design. Detta används i vehicle, CarMotionManger, CarController, Car, truck och säkert fler ställen i koden.
+
+- Vilka designproblem löste ni genom att använda det?
+Detta gör så vi inte bara repetera kod flera gånger och låter oss strukturera upp vår design väldigt snyggt och få så att informationen liksom faller ner från superklasser ner till subklasser.
+
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+Då vi använt oss av omedvetet där vi bedömt det lämpligt så finns det inte fler ställen.
+
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+Inga nuvarande designproblem då där det bör användas har det använts.
