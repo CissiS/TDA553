@@ -71,23 +71,23 @@ public class CarController {
 
     public void generateRandomVehicle() {
         int randomNr = (int) (Math.random() * 3);
+        Vehicle newVehicle;
         if (randomNr == 0) {
-            Factory.createVehicle("Volvo240", new Point(200, 0));
-            cmm.vehicles.add(Factory.createVehicle("Volvo240", new Point(200, 0)));
-            frame.drawPanel.addVehicleImage(Factory.createVehicle("Volvo240", new Point(200, 0)));
+            newVehicle = Factory.createVehicle("Volvo240", new Point(200, 0));
             System.out.print("Volvo generated");
         } else if (randomNr == 1) {
-            Factory.createVehicle("Saab95", new Point(500, 0));
-            cmm.vehicles.add(Factory.createVehicle("Saab95", new Point(500, 0)));
-            frame.drawPanel.addVehicleImage(Factory.createVehicle("Saab95", new Point(500, 0)));
+            newVehicle = Factory.createVehicle("Saab95", new Point(500, 0));
             System.out.println("Saab generated");
-        }
-        else {
-            Factory.createVehicle("Scania", new Point(700, 0));
-            cmm.vehicles.add(Factory.createVehicle("Scania", new Point(700, 0)));
-            frame.drawPanel.addVehicleImage(Factory.createVehicle("Scania", new Point(700, 0)));
+        } else {
+            newVehicle = Factory.createVehicle("Scania", new Point(700, 0));
             System.out.println("Scania generated");
         }
+        cmm.vehicles.add(newVehicle);
+        frame.drawPanel.addVehicleImage(newVehicle);
+        for (Vehicle vehicle : cmm.vehicles) {
+            System.out.println(vehicle.getId());
+            System.out.println(cmm.vehicles);
+    }
     }
 
     // This actionListener is for the timer.
@@ -95,14 +95,15 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : cmm.getVehicles()) {
                 vehicle.move();
+                int x = (int) Math.round(vehicle.getPosition().getX());
+                int y = (int) Math.round(vehicle.getPosition().getY());
                 boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 700 || vehicle.getPosition().y > 500 || vehicle.getPosition().y < 0;
                 if (atEdge) {
                     vehicle.turnLeft();
                     vehicle.turnLeft();
                 }
 
-                int x = (int) Math.round(vehicle.getPosition().getX());
-                int y = (int) Math.round(vehicle.getPosition().getY());
+
                 frame.drawPanel.moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();

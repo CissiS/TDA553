@@ -29,7 +29,6 @@ public class Simulator {
         carController.cmm.vehicles.add(scania);
 
         // Skapa gränssnittet och starta simulationen
-        carController.frame = new CarView("CarSim 1.0", carController);
         carController.frame.drawPanel.setVehicles(carController.cmm.vehicles);
         carController.frame.drawPanel.getWorkshopImage();
 
