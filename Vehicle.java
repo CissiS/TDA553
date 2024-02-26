@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.UUID;
 
-public abstract class Vehicle implements Movable, ImageInstance{
+public abstract class Vehicle implements Movable{
     //Common attributes
     private final double enginePower;
     protected double currentSpeed;
@@ -116,17 +116,15 @@ public abstract class Vehicle implements Movable, ImageInstance{
         this.position = position;
     }
 
-    @Override
     public String getHashCode() {
         return String.valueOf(this.hashCode());
     }
 
-    @Override
+
     public String getModelName() {
         return modelName;
     }
 
-    @Override
     public Point getPosition() {
         return position;
     }
