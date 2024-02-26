@@ -3,21 +3,45 @@ Användargränssnittet ni utgick från i del A var en ansats till implementation
 Model-View-Controller Pattern, men där gränsdragningen mellan model, view, controller och
 applikation inte var något vidare genomtänkt (för att inte säga usel).
 
-Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet?
-Vad borde ha gjorts smartare, dummare eller tunnare?
-Vilka av dessa brister åtgärdade ni med er nya design från del 2A? Hur då?
-Vilka brister åtgärdade ni inte?
+- Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet?
+- Vad borde ha gjorts smartare, dummare eller tunnare?
+- Vilka av dessa brister åtgärdade ni med er nya design från del 2A? Hur då?
+- Vilka brister åtgärdade ni inte?
 Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
+(är detta inte diagrammet från förra uppgiften?, vad är det som skiljer sig)
 
 Svar:
 I det ursprungliga användargränssnittet var det svårt att se var gränsdragningen mellan
 model, view, controller och applikation. View hanterade både user input och moveit (rörelser)
-vilket borde gjorts av controller. View hade även en koppling till model vilket inte är optimalt.
+vilket borde gjorts av controller. Det var även oklart vad som var model.
 Vidare hade view också hand om knapparnas layout och information.
-Controller instansierade även bilarna, vilket borde gjorts av model.
+Controller instansierade även bilarna var för sig, vilket borde gjorts av en model.
 Controller fungerade även som en mainfunktion vilket inte är optimalt.
 
 Vi åtgärdade detta genom att skapa en ny klass, Factory, som skapar bilarna, som är starkt kopplad
-till model. Vi skapade carmotionhandler som tog hand om rörelser av bilarna.
+till model. Vi skapade CarMotionManager som tog hand om rörelser av bilarna.
 Vi skapade även en ny klass, Buttons, som hanterade knapparnas layout och information.
 Vi skapade även en ny klass, Simulator, som fungerade som mainfunktion.
+Den nya klassen CarModel skapas även då att skapa nya fordon är en del av modellens ansvar och inte Controllers.
+Logiken från main för att skapa fordon och ställa in deras positioner är flyttad till CarModel istället.
+_________________________________________________________________
+Question3:
+- Observer, Factory Method, State, Composite.
+För vart och ett av dessa fyra designmönster, svara på följande frågor:
+- Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
+- Vilka designproblem löste ni genom att använda det?
+- Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
+- Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+
+* Observer
+CarView observera CarController om förändringar i modellen som den behöver uppdatera sitt gränssnitt för.
+kanske carmodel kan dra nytta av, minskar beroenden med carcontroller
+* Factory Method
+Använder Factory Method-mönstret . Factory-klassen skapar olika typer av fordon baserat på givet namn genom att anropa Factory.createVehicle-metoden.
+
+* State
+lämpligt om vi har objekt som ändrar sitt beteende baserat på deras interna tillstånd,
+vilket inte verkar vara fallet nu
+
+* Composite.
+har med vehivle
