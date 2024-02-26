@@ -23,11 +23,11 @@ public class DrawPanel extends JPanel {
     public void setVehicles(ArrayList<Vehicle> vehicles) {
         for (Vehicle vehicle : vehicles) {
             BufferedImage image = getImageForModel(vehicle.getModelName());
-        if (image != null) {
-            carImages.add(new CarImage(vehicle.getModelName(), image, vehicle.getPosition(), vehicle.getId()));
+            if (image != null) {
+                carImages.add(new CarImage(vehicle.getModelName(), image, vehicle.getPosition(), vehicle.getId()));
+            }
         }
     }
-}
 
 
     public BufferedImage getImageForModel(String modelName) {
@@ -56,7 +56,7 @@ public class DrawPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (CarImage carImage : carImages) {
-                g.drawImage(carImage.image, carImage.position.x, carImage.position.y, this);if (volvoWorkshopImage != null)
+            g.drawImage(carImage.image, carImage.position.x, carImage.position.y, this);if (volvoWorkshopImage != null)
                 g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, this);
         }
         if (volvoWorkshopImage != null)

@@ -74,15 +74,18 @@ public class CarController {
         if (randomNr == 0) {
             Factory.createVehicle("Volvo240", new Point(200, 0));
             cmm.vehicles.add(Factory.createVehicle("Volvo240", new Point(200, 0)));
+            frame.drawPanel.addVehicleImage(Factory.createVehicle("Volvo240", new Point(200, 0)));
             System.out.print("Volvo generated");
         } else if (randomNr == 1) {
             Factory.createVehicle("Saab95", new Point(500, 0));
             cmm.vehicles.add(Factory.createVehicle("Saab95", new Point(500, 0)));
+            frame.drawPanel.addVehicleImage(Factory.createVehicle("Saab95", new Point(500, 0)));
             System.out.println("Saab generated");
         }
         else {
             Factory.createVehicle("Scania", new Point(700, 0));
             cmm.vehicles.add(Factory.createVehicle("Scania", new Point(700, 0)));
+            frame.drawPanel.addVehicleImage(Factory.createVehicle("Scania", new Point(700, 0)));
             System.out.println("Scania generated");
         }
     }
