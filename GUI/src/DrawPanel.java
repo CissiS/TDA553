@@ -80,6 +80,14 @@ public class DrawPanel extends JPanel {
         }
     }
 
+    public void removeVehicleImage(Vehicle vehicle) {
+        for (CarImage carImage : carImages) {
+            if (carImage.id.equals(vehicle.getId())) {
+                carImages.remove(carImage);
+                break;
+            }
+        }
+    }
     public class CarImage {
         String modelName;
         BufferedImage image;

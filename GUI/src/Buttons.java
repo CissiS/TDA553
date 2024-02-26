@@ -35,6 +35,7 @@ public class Buttons {
     private final JButton turboOnButton = new JButton("Turbo On");
     private final JButton turboOffButton = new JButton("Turbo Off");
     private final JButton addCarButton = new JButton("Add Car");
+    private final JButton removeCarButton = new JButton("Remove Car");
     private final JButton startAllButton = new JButton("Start All");
     private final JButton stopAllButton = new JButton("Stop All");
 
@@ -47,6 +48,7 @@ public class Buttons {
         controlPanel.add(brakePanel);
         controlPanel.add(rampPanel);
         controlPanel.add(addCarButton);
+        controlPanel.add(removeCarButton);
 
         turboOnButton.setPreferredSize(new Dimension(200,200));
         controlPanel.add(turboOnButton);
@@ -117,6 +119,7 @@ public class Buttons {
         turboOnButton.addActionListener(e -> carC.turboOn());
         turboOffButton.addActionListener(e -> carC.turboOff());
         addCarButton.addActionListener(e -> carC.generateRandomVehicle());
+        removeCarButton.addActionListener(e -> carC.removeRandomVehicle());
         startAllButton.addActionListener(e -> carC.startAllCars());
         stopAllButton.addActionListener(e -> carC.stopAllCars());
         raiseButton.addActionListener(e -> carC.raise(rampAngle));

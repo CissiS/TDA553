@@ -86,10 +86,20 @@ public class CarController {
         frame.drawPanel.addVehicleImage(newVehicle);
         for (Vehicle vehicle : cmm.vehicles) {
             System.out.println(vehicle.getId());
-            System.out.println(cmm.vehicles);
+            System.out.println(cmm.vehicles.size());
     }
     }
 
+    public void removeRandomVehicle() {
+        if (cmm.vehicles.size() > 0) {
+            int randomNr = (int) (Math.random() * cmm.vehicles.size());
+            Vehicle vehicle = cmm.vehicles.get(randomNr);
+            cmm.vehicles.remove(vehicle);
+            frame.drawPanel.removeVehicleImage(vehicle);
+            frame.drawPanel.repaint();
+            System.out.println(cmm.vehicles.size());
+        }
+    }
     // This actionListener is for the timer.
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {

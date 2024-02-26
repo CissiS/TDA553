@@ -16,7 +16,6 @@ public class Simulator {
         simulator.setupSimulation();
     }
 
-
     public void setupSimulation() {
         // Skapa fordon och lägg till dem i modellen
         Vehicle volvo = Factory.createVehicle("Volvo240", new Point(0, 0));
@@ -31,7 +30,6 @@ public class Simulator {
         // Skapa gränssnittet och starta simulationen
         carController.frame.drawPanel.setVehicles(carController.cmm.vehicles);
         carController.frame.drawPanel.getWorkshopImage();
-
 
         // Start the timer
         carController.timer.start();
