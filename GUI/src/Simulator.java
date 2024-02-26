@@ -26,7 +26,7 @@ public class Simulator {
 
         Vehicle scania = Factory.createVehicle("Scania", new Point(400, 0));
         carController.cmm.vehicles.add(scania);
-
+        
         // Skapa gränssnittet och starta simulationen
         carController.frame.drawPanel.setVehicles(carController.cmm.vehicles);
         carController.frame.drawPanel.getWorkshopImage();

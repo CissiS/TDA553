@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//detta är vår CarModel
 public class CarMotionManager implements CarTransportHandler {
     public ArrayList<Vehicle> vehicles;
     private Workshop<Volvo240> volvoWorkshop;

@@ -19,11 +19,11 @@ Controller instansierade även bilarna var för sig, vilket borde gjorts av en m
 Controller fungerade även som en mainfunktion vilket inte är optimalt.
 
 Vi åtgärdade detta genom att skapa en ny klass, Factory, som skapar bilarna, som är starkt kopplad
-till model. Vi skapade CarMotionManager som tog hand om rörelser av bilarna.
+till model. Vi skapade CarMotionManager som tog hand om rörelser av bilarna, som i sig fyller syftet som en model har.
+Den hanterar domänlogiken kopplat till bilen men har ett namn som tydligt syftar på ändringar av bilens logik och inte bara en bilmodell.
 Vi skapade även en ny klass, Buttons, som hanterade knapparnas layout och information.
 Vi skapade även en ny klass, Simulator, som fungerade som mainfunktion.
-Den nya klassen CarModel skapas även då att skapa nya fordon är en del av modellens ansvar och inte Controllers.
-Logiken från main för att skapa fordon och ställa in deras positioner är flyttad till CarModel istället.
+Den nya klassen CarMotionManager skapas även då att skapa nya fordon är en del av modellens ansvar och inte Controllers.
 _________________________________________________________________
 Question3:
 - Observer, Factory Method, State, Composite.
@@ -34,15 +34,13 @@ För vart och ett av dessa fyra designmönster, svara på följande frågor:
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 
 
-
-
 * Factory method:
 
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
-Ja, detta använder vi i facory klassen.
+Ja, detta använder vi i Factory klassen.
 
 - Vilka designproblem löste ni genom att använda det?
-Det har gjort så att vi med ett knapptryck kan skapa upp nya bilar.
+Det har gjort så att vi med ett knapptryck kan skapa upp nya bilar och slipper att MVC-modellen ska skapa bilarna.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
 Inte genom att använda det eftersom vi redan gör det men man hade kunnat lägga till en spinner eller liknande till add knapparna och med hjälp av värdena låta användaren
@@ -54,23 +52,20 @@ Då vi redan använder det.
 
 * Observer
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
-Vi använder detta oavsiktligt i vår design. Vi har en klass som heter timelistener i CarController som har metoden actionPerformed.
-Detta används i buttons så när användaren trycker på en knapp som fångar den actionPerformed upp det.
+Vi använder detta oavsiktligt i vår design. Vi har en klass som heter timelistener och actionlistner i CarController som har metoden actionPerformed
+för att observera och hantera händelser i gränssnittet.
+Detta används i Buttons så när användaren trycker på en knapp som fångar den actionPerformed upp det.
 
 - Vilka designproblem löste ni genom att använda det?
-Så man kunde använda sig utav knapparna.
+Så man kunde använda sig utav knapparna. Man hanterar användarens interaktioner och uppdatera applikationens tillstånd baserat på dessa interaktioner.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
 Nej inte för nuvarande.
 
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
-Förnuvrande finns det inga mer områden i desginen då det behövs, det hade eventuellt varit för triviala saker som att få bilen att studsa mot rutan men att använda detta för det hade gjort saker och ting mer
+För nuvarande finns det inga mer områden i designen då det behövs.
+Det hade eventuellt varit för triviala saker som att få bilen att studsa mot rutan men att använda detta för det hade gjort saker och ting mer
 komplicerat än vad det behöver vara,
-
-
-CarView observera CarController om förändringar i modellen som den behöver uppdatera sitt gränssnitt för.
-kanske carmodel kan dra nytta av, minskar beroenden med carcontroller ????????????????
-
 
 
 * State
@@ -81,23 +76,23 @@ Nej.
 Vi har inte använt det.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
-Inte för nuvarande.
+Inte för nuvarande. Om det funnits Om ni har objekt som ändrar beteende baserat på deras interna tillstånd hade det kanske varit en lämplig lösning.
 
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 För nuvarande har vi inga designproblem som behöver lösas med hjälp av att använda state så finns ingen poäng att använda för tillfället.
 Hade varit lämpligt om vi hade objekt som ändrar sitt beteende baserat på deras interna tillstånd.
 
-
-
 * Composite
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
 Vi använder detta oavsiktligt i vår design. Detta används i vehicle, CarMotionManger, CarController, Car, truck och säkert fler ställen i koden.
+Objekt kan då behandlas enhetligt oavsett om de är komplexa eller enkla,
 
 - Vilka designproblem löste ni genom att använda det?
-Detta gör så vi inte bara repetera kod flera gånger och låter oss strukturera upp vår design väldigt snyggt och få så att informationen liksom faller ner från superklasser ner till subklasser.
+Detta gör så vi inte bara repetera kod flera gånger och låter oss strukturera upp vår design väldigt snyggt och få så att informationen faller ner från superklasser till subklasser.
+Det leder till mer modulär design.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
-Då vi använt oss av omedvetet där vi bedömt det lämpligt så finns det inte fler ställen.
+Kan inte identifierar några ytterligare områden där det kan tillämpas.
 
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 Inga nuvarande designproblem då där det bör användas har det använts.
