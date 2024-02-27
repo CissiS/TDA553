@@ -29,6 +29,14 @@ public class CarTransport extends Truck implements CarTransportHandler{
     }
 
     @Override
+    public void move() {
+        super.move();
+        for (Vehicle car : cars) {
+            car.position.x = position.x;
+            car.position.y = position.y;
+        }
+    }
+    @Override
     public void raise(double amount) {
         if (this.isRampPositioned()) {
             setRampToExtreme(true);

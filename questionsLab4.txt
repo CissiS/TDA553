@@ -68,7 +68,7 @@ Det hade eventuellt varit för triviala saker som att få bilen att studsa mot r
 komplicerat än vad det behöver vara,
 
 
-* State
+* State(( hur flaket agerar med sina truck) hur truck inteagerar med sina flak är state pattern?
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
 Nej.
 
@@ -84,18 +84,14 @@ Hade varit lämpligt om vi hade objekt som ändrar sitt beteende baserat på der
 
 * Composite
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
-Vi använder detta oavsiktligt i vår design. Detta används i vehicle, CarMotionManger, CarController, Car, truck och säkert fler ställen i koden.
-Objekt kan då behandlas enhetligt oavsett om de är komplexa eller enkla,
-
+Ja, vi har till exempel ett gemensamt gränssnitt Vehicle som CarTransport och Car implementerar
 - Vilka designproblem löste ni genom att använda det?
-Detta gör så vi inte bara repetera kod flera gånger och låter oss strukturera upp vår design väldigt snyggt och få så att informationen faller ner från superklasser till subklasser.
-Det leder till mer modulär design.
+Vi hanterar både enskilda fordon och sammansättningar av fordon (på CarTransport) på ett enhetligt sätt (move) och möjliggöra rekursiv behandling av fordonshierarkin.
+När CarTransport körs kommer alltså även positionerna hos bilarna på CarTransport att uppdateras samtidigt.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
 Kan inte identifierar några ytterligare områden där det kan tillämpas.
 
-
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
-Inga nuvarande designproblem då där det bör användas har det använts.
-Om man skulle vilja ha hierarki inom objekten som skapas, exempelvis en grupp bilar som ett objekt, hade det varit lämpligt att använda composite.
-Just nu har vi metoder som stop all start all som fungerar på alla bilar, men de finns inget inbördes hierarki mellan bilarna.
+Om det finns fler saker som båda Car och CarTransport kan göra på ett enhetligt sätt eller andra liknande situationer mellan hierarkierna,
+kan det vara en indikation på att använda Composite Pattern mer.
