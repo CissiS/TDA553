@@ -66,7 +66,7 @@ Motivera, i termer av de principer vi gått igenom, varför era förbättringar 
 Refaktoriseringsplan:
     1. Flytta ut main från CarController till Simulator. ((KLAR))
     2. Låt Simulator gå till Factory som i sin tur är beroende av de olika bilmodellerna ((klar))
-    3. Döp om enligt MVC modellen med en CarModel som är kopplat till Vehicle istället för DrawPanel.
+    3. Döp om enligt MVC modellen med en CarModel/CarMotionHandler som är kopplat till Vehicle istället för DrawPanel.
     4. Bryt ut CarMotionManager från CarController ((klar))
     5. Bryt ut Buttons och EventHandler från CarView. ((klar))
     6. Låt CarController ta tillvara på CarTransportHandlerInterfacet för att addCar i Workshop (typ? klar)
@@ -78,4 +78,4 @@ Följande delar kan man arbeta på parallellt:
     2.  Använder Factory för att skapa bilmodellerna, sen behöver man integrera den med Simulator klassen
     men man kan börja med att anpassa den till bilarna.
     3.  Bryta ut CarMotionManager
-    4.  Bryta ut Buttons och EventHandler
+    4.  Bryta ut Buttons
