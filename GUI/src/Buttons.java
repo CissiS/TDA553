@@ -23,11 +23,6 @@ public class Buttons {
 
 
     //Buttons
-
-    private JSpinner brakeSpinner = new JSpinner();
-    private JSpinner gasSpinner = new JSpinner();
-    private JSpinner raiseSpinner = new JSpinner();
-    private JSpinner lowerSpinner = new JSpinner();
     private final JButton gasButton = new JButton("Gas");
     private final JButton brakeButton = new JButton("Brake");
     private final JButton raiseButton = new JButton("Raise");
@@ -91,30 +86,14 @@ public class Buttons {
                 70, //max
                 1);//step
 
-        gasSpinner = new JSpinner(spinnerModelGas);
-        brakeSpinner = new JSpinner(spinnerModelBrake);
-        raiseSpinner = new JSpinner(spinnerModelRamp);
-        lowerSpinner = new JSpinner(spinnerModelRamp);
+        JSpinner gasSpinner = new JSpinner(spinnerModelGas);
+        JSpinner brakeSpinner = new JSpinner(spinnerModelBrake);
+        JSpinner raiseSpinner = new JSpinner(spinnerModelRamp);
+        JSpinner lowerSpinner = new JSpinner(spinnerModelRamp);
 
-        gasSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
-
-        brakeSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                brakeAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
-        raiseSpinner.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                rampAngle = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
+        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner) e.getSource()).getValue());
+        brakeSpinner.addChangeListener(e -> brakeAmount = (int) ((JSpinner) e.getSource()).getValue());
+        raiseSpinner.addChangeListener(e -> rampAngle = (int) ((JSpinner) e.getSource()).getValue());
 
         turboOnButton.addActionListener(e -> carC.turboOn());
         turboOffButton.addActionListener(e -> carC.turboOff());
@@ -137,33 +116,12 @@ public class Buttons {
         rampPanel.add(rampLabel, BorderLayout.PAGE_START);
         rampPanel.add(lowerSpinner, BorderLayout.PAGE_END);
 
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
-            }
-        });
+        // ActionListener
 
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.brake(brakeAmount);
-            }
-        });
-
-        lowerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.lower(rampAngle);
-            }
-        });
-
-        raiseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.raise(rampAngle);
-            }
-        });
+        gasButton.addActionListener(e -> carC.gas(gasAmount));
+        brakeButton.addActionListener(e -> carC.brake(brakeAmount));
+        lowerButton.addActionListener(e -> carC.lower(rampAngle));
+        raiseButton.addActionListener(e -> carC.raise(rampAngle));
 
     }
 
