@@ -70,25 +70,40 @@ public class CarController {
     }
 
     public void generateRandomVehicle() {
-        int randomNr = (int) (Math.random() * 3);
         if (cmm.vehicles.size() < 10) {
-            Vehicle newVehicle;
-            if (randomNr == 0) {
-                newVehicle = Factory.createVehicle("Volvo240", new Point(300, 0));
-                System.out.print("Volvo generated");
-            } else if (randomNr == 1) {
-                newVehicle = Factory.createVehicle("Saab95", new Point(500, 0));
-                System.out.println("Saab generated");
-            } else {
-                newVehicle = Factory.createVehicle("Scania", new Point(700, 0));
-                System.out.println("Scania generated");
+            int randomNr = (int) (Math.random() * 3);
+            Point newPoint = new Point((cmm.vehicles.size() * 100) % 800, 0);
+            Vehicle newVehicle = null;
+
+            switch (randomNr) {
+                case 0:
+                    newVehicle = Factory.createVehicle("Volvo240", newPoint);
+                    System.out.println("Volvo generated");
+                    break;
+                case 1:
+                    newVehicle = Factory.createVehicle("Saab95", newPoint);
+                    System.out.println("Saab generated");
+                    break;
+                case 2:
+                    newVehicle = Factory.createVehicle("Scania", newPoint);
+                    System.out.println("Scania generated");
+                    break;
+                default:
+                    System.out.println("Error in vehicle generation");
+                    break;
             }
-            cmm.vehicles.add(newVehicle);
-            frame.drawPanel.addVehicleImage(newVehicle);
-            frame.drawPanel.repaint();
-                System.out.println(cmm.vehicles.size() + " vehicles left");
+
+            if (newVehicle != null) {
+                cmm.vehicles.add(newVehicle);
+                frame.drawPanel.addVehicleImage(newVehicle);
+                frame.drawPanel.repaint();
+                System.out.println(cmm.vehicles.size() + " vehicles now in the simulation");
+            }
+        } else {
+            System.out.println("Maximum vehicle limit reached");
         }
     }
+
 
     public void removeRandomVehicle() {
         if (!cmm.vehicles.isEmpty()) {

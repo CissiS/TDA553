@@ -94,5 +94,8 @@ Det leder till mer modulär design.
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
 Kan inte identifierar några ytterligare områden där det kan tillämpas.
 
+
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 Inga nuvarande designproblem då där det bör användas har det använts.
+Om man skulle vilja ha hierarki inom objekten som skapas, exempelvis en grupp bilar som ett objekt, hade det varit lämpligt att använda composite.
+Just nu har vi metoder som stop all start all som fungerar på alla bilar, men de finns inget inbördes hierarki mellan bilarna.
