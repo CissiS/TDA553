@@ -30,19 +30,19 @@ public class DrawPanel extends JPanel {
     }
 
 
-    public BufferedImage getImageForModel(String modelName) {
-        try {
-            String imagePath = "pics/" + modelName + ".jpg";
-            return ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
+//    public BufferedImage getImageForModel(String modelName) {
+//        try {
+//            String imagePath = "pics/" + modelName + ".jpg";
+//            return ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//    }
 
     public BufferedImage getWorkshopImage() {
         try {
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream());
             return volvoWorkshopImage;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -50,8 +50,7 @@ public class DrawPanel extends JPanel {
         }
     }
 
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

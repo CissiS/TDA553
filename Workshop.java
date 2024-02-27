@@ -9,10 +9,13 @@ public class Workshop <model extends Car> {
     private Point position = new Point(0,0);
     private final int capacity;
 
-    public Workshop(int capacity, Point position) {
+    private String imagePath;
+
+    public Workshop(int capacity, Point position, String imagePath) {
         this.capacity = capacity;
         this.cars = new ArrayList<>();
         this.position = position;
+        this.imagePath = imagePath;
     }
 
     public void addCar(model car) {
@@ -36,6 +39,9 @@ public class Workshop <model extends Car> {
         }
     }
 
+    public String getWorkshopPic(){
+        return imagePath;
+    }
     public ArrayList<model> getCars() {
         return cars;
     }

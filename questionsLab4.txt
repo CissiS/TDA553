@@ -85,7 +85,6 @@ Hade varit lämpligt om vi hade objekt som ändrar sitt beteende baserat på der
 * Composite
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
 Vi använder detta oavsiktligt i vår design. Detta används i vehicle, CarMotionManger, CarController, Car, truck och säkert fler ställen i koden.
-Objekt kan då behandlas enhetligt oavsett om de är komplexa eller enkla,
 
 - Vilka designproblem löste ni genom att använda det?
 Detta gör så vi inte bara repetera kod flera gånger och låter oss strukturera upp vår design väldigt snyggt och få så att informationen faller ner från superklasser till subklasser.

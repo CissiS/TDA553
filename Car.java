@@ -4,8 +4,8 @@ public abstract class Car extends Vehicle{
     private final int nrDoors;
 
 
-    public Car (int nrDoors, double enginePower, Color color, String modelName, int length) {
-        super(enginePower, color, modelName, length);
+    public Car (int nrDoors, double enginePower, Color color, String modelName, int length, String imagePath) {
+        super(enginePower, color, modelName, length, imagePath);
         this.nrDoors = nrDoors;
     }
 

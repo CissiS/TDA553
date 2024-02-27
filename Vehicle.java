@@ -13,9 +13,11 @@ public abstract class Vehicle implements Movable{
 
     public boolean engineState;
     private String id;
+    String imagePath;
 
 
-    public Vehicle(double enginePower, Color color, String modelName, int length) {
+
+    public Vehicle(double enginePower, Color color, String modelName, int length, String imagePath) {
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
@@ -23,6 +25,7 @@ public abstract class Vehicle implements Movable{
         this.currentDirection = 90;
         this.length = length;
         this.id = UUID.randomUUID().toString();
+        this.imagePath = imagePath;
         stopEngine();
     }
 

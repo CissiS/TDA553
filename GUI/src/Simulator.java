@@ -1,13 +1,18 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Simulator {
+    private final int delay = 50;
+    public Timer timer = new Timer(delay, new TimerListener());
+    private CarController carC;
 
-    private CarController carController;
 
     public Simulator() {
         // Skapa en instans av CarController;
-        this.carController = new CarController(new CarMotionManager(new ArrayList<>(), new Workshop<>(5, new Point(0, 300))));
+        this.carC = new CarController(new CarMotionManager(new ArrayList<>(), new Workshop<>(5, new Point(0, 300), "pics/VolvoBrand.jpg")));
     }
 
     public static void main(String[] args) {
@@ -19,19 +24,38 @@ public class Simulator {
     public void setupSimulation() {
         // Skapa fordon och lägg till dem i modellen
         Vehicle volvo = Factory.createVehicle("Volvo240", new Point(0, 0));
-        carController.cmm.vehicles.add(volvo);
+        carC.cmm.vehicles.add(volvo);
 
         Vehicle saab = Factory.createVehicle("Saab95", new Point(200, 0));
-        carController.cmm.vehicles.add(saab);
+        carC.cmm.vehicles.add(saab);
 
         Vehicle scania = Factory.createVehicle("Scania", new Point(400, 0));
-        carController.cmm.vehicles.add(scania);
+        carC.cmm.vehicles.add(scania);
         
         // Skapa gränssnittet och starta simulationen
-        carController.frame.drawPanel.setVehicles(carController.cmm.vehicles);
-        carController.frame.drawPanel.getWorkshopImage();
-
+        carC.frame.drawPanel.setVehicles(carC.cmm.vehicles);
+        carC.Workshop
         // Start the timer
-        carController.timer.start();
+        timer.start();
+    }
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (Vehicle vehicle : carC.cmm.getVehicles()) {
+                vehicle.move();
+                int x = (int) Math.round(vehicle.getPosition().getX());
+                int y = (int) Math.round(vehicle.getPosition().getY());
+                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 700 || vehicle.getPosition().y > 500 || vehicle.getPosition().y < 0;
+                if (atEdge) {
+                    vehicle.turnLeft();
+                    vehicle.turnLeft();
+                }
+
+
+                carC.frame.drawPanel.moveit(x, y, vehicle);
+                // repaint() calls the paintComponent method of the panel
+                carC.frame.drawPanel.repaint();
+                carC.cmm.loadCar(vehicle);
+            }
+        }
     }
 }

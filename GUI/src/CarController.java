@@ -11,28 +11,14 @@ import java.util.ArrayList;
  */
 
 public class CarController {
-    // member fields:
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    public Timer timer = new Timer(delay, new TimerListener());
 
     public CarMotionManager cmm;
-    // The frame that represents this instance View of the MVC pattern
     CarView frame;
     public CarController(CarMotionManager cmm) {
         this.cmm = cmm;
         this.frame = new CarView("CarSim 1.0", this);
     }
-
-
-    //methods:
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
 
     public void gas(int amount) {
         cmm.gas(amount);
@@ -116,27 +102,7 @@ public class CarController {
             System.out.println(cmm.vehicles.size() + " vehicles left");
         }
     }
-    // This actionListener is for the timer.
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : cmm.getVehicles()) {
-                vehicle.move();
-                int x = (int) Math.round(vehicle.getPosition().getX());
-                int y = (int) Math.round(vehicle.getPosition().getY());
-                boolean atEdge = vehicle.getPosition().x < 0 || vehicle.getPosition().x > 700 || vehicle.getPosition().y > 500 || vehicle.getPosition().y < 0;
-                if (atEdge) {
-                    vehicle.turnLeft();
-                    vehicle.turnLeft();
-                }
-
-
-                frame.drawPanel.moveit(x, y, vehicle);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-                cmm.loadCar(vehicle);
-            }
-        }
-    }}
+}
 
 
 
