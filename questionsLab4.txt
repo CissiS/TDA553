@@ -52,7 +52,7 @@ Då vi redan använder det.
 
 * Observer
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
-Vi använder detta oavsiktligt i vår design. Vi har en klass som heter timelistener och actionlistner i CarController som har metoden actionPerformed
+Vi använder detta oavsiktligt i vår design. Vi har en klass som heter timelistener och actionlistener i CarController som har metoden actionPerformed
 för att observera och hantera händelser i gränssnittet.
 Detta används i Buttons så när användaren trycker på en knapp som fångar den actionPerformed upp det.
 
@@ -68,19 +68,23 @@ Det hade eventuellt varit för triviala saker som att få bilen att studsa mot r
 komplicerat än vad det behöver vara,
 
 
-* State(( hur flaket agerar med sina truck) hur truck inteagerar med sina flak är state pattern?
+* State
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
-Nej.
+Ja, genom att ha olika tillstånd för lastbilens flak (uppfällt/nedfällt) kan lastbilen bete sig olika beroende på det aktuella tillståndet.
+Exempelvis kan inte lastbilen köra om flaket inte är i rätt position.
 
 - Vilka designproblem löste ni genom att använda det?
-Vi har inte använt det.
+Beteendet hos lastbilen kan variera beroende på det aktuella tillståndet hos dess flak och
+vi kan enklare anpassa speciella funktioners som bara kan ske i olika tillstånd.
+Detta minskar också koddupliceringen eftersom Truck och CarTransport funkar lika i denna aspekt.
 
 - Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern?
-Inte för nuvarande. Om det funnits Om ni har objekt som ändrar beteende baserat på deras interna tillstånd hade det kanske varit en lämplig lösning.
+Inte för nuvarande. Om det funnits fler objekt som ändrar beteende baserat på deras interna tillstånd hade det kanske varit en lämplig lösning.
+Eller om det är större skillnader i dessa tillstånd skulle man också kunna implementera separata klasser för dem.
 
 - Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
-För nuvarande har vi inga designproblem som behöver lösas med hjälp av att använda state så finns ingen poäng att använda för tillfället.
-Hade varit lämpligt om vi hade objekt som ändrar sitt beteende baserat på deras interna tillstånd.
+För nuvarande har vi inga fler designproblem som behöver lösas med hjälp av att använda state pattern.
+Hade varit lämpligt om vi hade fler objekt som ändrar sitt beteende baserat på deras interna tillstånd.
 
 * Composite
 - Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt?
