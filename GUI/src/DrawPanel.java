@@ -1,23 +1,30 @@
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel {
+public class DrawPanel extends JPanel implements VehicleListener {
+    private static DrawPanel instance;
     public ArrayList<CarImage> carImages = new ArrayList<>();
     BufferedImage volvoWorkshopImage;
+    Point volvoWorkshopPoint = new Point(0, 300);
 
-    // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+
+    private DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.cyan);
+    }
+
+    public static DrawPanel getInstance(int x, int y) {
+        if (instance == null) {
+            instance = new DrawPanel(x, y);
+        }
+        return instance;
     }
 
     public void setVehicles(ArrayList<Vehicle> vehicles) {
@@ -50,8 +57,7 @@ public class DrawPanel extends JPanel {
         }
     }
 
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -81,6 +87,8 @@ public class DrawPanel extends JPanel {
     }
 
     public void removeVehicleImage(Vehicle vehicle) {
+        System.out.println("Jag är här wallah");
+
         for (CarImage carImage : carImages) {
             if (carImage.id.equals(vehicle.getId())) {
                 carImages.remove(carImage);
@@ -88,6 +96,18 @@ public class DrawPanel extends JPanel {
             }
         }
     }
+
+    @Override
+    public void onVehicleRemoved(Vehicle vehicle) {
+        removeVehicleImage(vehicle);
+    }
+
+    @Override
+    public void onVehicleAdded(Vehicle vehicle) {
+        addVehicleImage(vehicle);
+    }
+
+
     public class CarImage {
         String modelName;
         BufferedImage image;
@@ -101,14 +121,5 @@ public class DrawPanel extends JPanel {
             this.id = id;
         }
     }
-
-
-    // Just a single image, TODO: Generalize
-
-    Point volvoWorkshopPoint = new Point(0, 300);
-
-    // TODO: Make this general for all cars
-
-
 }
 

@@ -20,7 +20,6 @@ public class CarView extends JFrame{
     // The controller member
     //CarController carC;
     Buttons buttons;
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     // Constructor
     public CarView(String frame, CarController carC){
@@ -31,8 +30,7 @@ public class CarView extends JFrame{
         this.add(buttons.getControlPanel());
     }
 
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
+
     private void initComponents(String title) {
         //Lägger till alla komponenter i gränssnittet
 
@@ -40,11 +38,8 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(drawPanel);
+        this.add(DrawPanel.getInstance(X,Y));
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        // ActionsListners för knappar reagerar på varje klick genom anrop till lämplig metod i CarController
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

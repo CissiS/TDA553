@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 //detta är vår CarModel
-public class CarMotionManager implements CarTransportHandler {
+import java.util.List;
+public class CarMotionManager implements CarTransportHandler, VehicleListener {
     public ArrayList<Vehicle> vehicles;
     private Workshop<Volvo240> volvoWorkshop;
 
@@ -15,27 +13,27 @@ public class CarMotionManager implements CarTransportHandler {
 
 
     public void setTurboOn() {
-        for (Vehicle vehicle : vehicles)
-        { if (vehicle instanceof Saab95) {
-            ((Saab95) vehicle).setTurboOn();
-            System.out.println(vehicle.getModelName() + " turbo on");
-        }
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle instanceof Saab95) {
+                ((Saab95) vehicle).setTurboOn();
+                System.out.println(vehicle.getModelName() + " turbo on");
+            }
         }
     }
 
     //Metod för att kika om Bilarna krockar med Workshops
-    public double calculatePosition(Point point1, Point point2){
-        double dx = point2.getX()-point1.getX();
-        double dy = point2.getY()-point1.getY();
-        return Math.sqrt(dx*dx + dy*dy);
+    public double calculatePosition(Point point1, Point point2) {
+        double dx = point2.getX() - point1.getX();
+        double dy = point2.getY() - point1.getY();
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     @Override
-    public void loadCar(Vehicle vehicle){
+    public void loadCar(Vehicle vehicle) {
         double distance = calculatePosition(vehicle.getPosition(), volvoWorkshop.getWorkshopPosition());
         final double COLLISION_DISTANCE_THRESHOLD = 20.0; // kanske ska flyttas ut till workshop eller nån annanstans
-        if (distance < COLLISION_DISTANCE_THRESHOLD){
-            if (vehicle instanceof Volvo240){
+        if (distance < COLLISION_DISTANCE_THRESHOLD) {
+            if (vehicle instanceof Volvo240) {
                 if (!volvoWorkshop.getCars().contains((Volvo240) vehicle)) {
                     volvoWorkshop.addCar((Volvo240) vehicle);
                     vehicle.stopEngine();
@@ -46,10 +44,10 @@ public class CarMotionManager implements CarTransportHandler {
     }
 
     @Override           //fel just nu, behövde implementera men vi behöver ej den egentligen?
-    public void unloadCar(){
-           if (!volvoWorkshop.getCars().isEmpty()){
-               volvoWorkshop.getCars().getFirst().startEngine();
-           }
+    public void unloadCar() {
+        if (!volvoWorkshop.getCars().isEmpty()) {
+            volvoWorkshop.getCars().getFirst().startEngine();
+        }
     }
 
     public void setTurboOff() {
@@ -110,13 +108,92 @@ public class CarMotionManager implements CarTransportHandler {
             System.out.println(vehicle.getModelName() + " started");
         }
     }
+
     public ArrayList<Vehicle> getVehicles() {
         return vehicles;
-}
+    }
 
-@Override           //fel just nu, behövde implementera
+    @Override           //fel just nu, behövde implementera
     public boolean isRampPositioned() {
         return calculatePosition(volvoWorkshop.getWorkshopPosition(), volvoWorkshop.getWorkshopPosition()) < 1;
-         }
+    }
 
+
+    private List<VehicleListener> vehicleListeners = new ArrayList<>();
+
+    public void VehicleListener(VehicleListener listener) {
+        vehicleListeners.add(listener);
+    }
+
+    protected void notifyVehicleRemoved(Vehicle vehicle) {
+        for (VehicleListener listener : vehicleListeners) {
+            listener.onVehicleRemoved(vehicle);
         }
+    }
+
+    protected void notifyVehicleAdded(Vehicle vehicle) {
+        for (VehicleListener listener : vehicleListeners) {
+            listener.onVehicleAdded(vehicle);
+        }
+    }
+
+    public void generateRandomVehicle() {
+        if (vehicles.size() < 10) {
+            int randomNr = (int) (Math.random() * 3);
+            Point newPoint = new Point((vehicles.size() * 100) % 800, 0);
+            Vehicle newVehicle = null;
+
+            switch (randomNr) {
+                case 0:
+                    newVehicle = Factory.createVehicle("Volvo240", newPoint);
+                    System.out.println("Volvo generated");
+                    break;
+                case 1:
+                    newVehicle = Factory.createVehicle("Saab95", newPoint);
+                    System.out.println("Saab generated");
+                    break;
+                case 2:
+                    newVehicle = Factory.createVehicle("Scania", newPoint);
+                    System.out.println("Scania generated");
+                    break;
+                default:
+                    System.out.println("Error in vehicle generation");
+                    break;
+            }
+
+            if (newVehicle != null) {
+                vehicles.add(newVehicle);
+
+                notifyVehicleAdded(newVehicle);
+
+                System.out.println(vehicles.size() + " vehicles now in the simulation");
+            }
+        } else {
+            System.out.println("Maximum vehicle limit reached");
+        }
+    }
+
+
+    public void removeRandomVehicle() {
+        if (!vehicles.isEmpty()) {
+            int randomNr = (int) (Math.random() * vehicles.size());
+            Vehicle vehicle = vehicles.get(randomNr);
+            vehicles.remove(vehicle);
+
+            notifyVehicleRemoved(vehicle);
+
+            System.out.println(vehicle.getModelName() + " removed");
+            System.out.println(vehicles.size() + " vehicles left");
+        }
+    }
+
+    @Override
+    public void onVehicleRemoved(Vehicle vehicle) {
+
+    }
+
+    @Override
+    public void onVehicleAdded(Vehicle vehicle) {
+
+    }
+}
