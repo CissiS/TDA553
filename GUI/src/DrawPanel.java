@@ -1,23 +1,30 @@
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel {
+public class DrawPanel extends JPanel implements VehicleListener {
+    private static DrawPanel instance;
     public ArrayList<CarImage> carImages = new ArrayList<>();
     BufferedImage volvoWorkshopImage;
+    Point volvoWorkshopPoint = new Point(0, 300);
 
-    // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+
+    private DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.cyan);
+    }
+
+    public static DrawPanel getInstance(int x, int y) {
+        if (instance == null) {
+            instance = new DrawPanel(x, y);
+        }
+        return instance;
     }
 
     public void setVehicles(ArrayList<Vehicle> vehicles) {
@@ -30,19 +37,19 @@ public class DrawPanel extends JPanel {
     }
 
 
-//    public BufferedImage getImageForModel(String modelName) {
-//        try {
-//            String imagePath = "pics/" + modelName + ".jpg";
-//            return ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//    }
+    public BufferedImage getImageForModel(String modelName) {
+        try {
+            String imagePath = "pics/" + modelName + ".jpg";
+            return ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
     public BufferedImage getWorkshopImage() {
         try {
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream());
+            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
             return volvoWorkshopImage;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -80,6 +87,8 @@ public class DrawPanel extends JPanel {
     }
 
     public void removeVehicleImage(Vehicle vehicle) {
+        System.out.println("Jag är här wallah");
+
         for (CarImage carImage : carImages) {
             if (carImage.id.equals(vehicle.getId())) {
                 carImages.remove(carImage);
@@ -87,6 +96,18 @@ public class DrawPanel extends JPanel {
             }
         }
     }
+
+    @Override
+    public void VehicleRemoved(Vehicle vehicle) {
+        removeVehicleImage(vehicle);
+    }
+
+    @Override
+    public void VehicleAdded(Vehicle vehicle) {
+        addVehicleImage(vehicle);
+    }
+
+
     public class CarImage {
         String modelName;
         BufferedImage image;
@@ -100,14 +121,4 @@ public class DrawPanel extends JPanel {
             this.id = id;
         }
     }
-
-
-    // Just a single image, TODO: Generalize
-
-    Point volvoWorkshopPoint = new Point(0, 300);
-
-    // TODO: Make this general for all cars
-
-
 }
-

@@ -9,25 +9,22 @@ public class Workshop <model extends Car> {
     private Point position = new Point(0,0);
     private final int capacity;
 
-    private String imagePath;
-
-    public Workshop(int capacity, Point position, String imagePath) {
+    public Workshop(int capacity, Point position) {
         this.capacity = capacity;
         this.cars = new ArrayList<>();
         this.position = position;
-        this.imagePath = imagePath;
     }
 
     public void addCar(model car) {
-    if (cars.size() < capacity) {
-        // Is it the valid car type?
-        // Will also exceed if the workshop takes all cars
-        // Or if the car is an instance of the accepted type
-        cars.add(car);
-    }
-    else {
-        throw new IllegalArgumentException("Workshop is full");
-    }
+        if (cars.size() < capacity) {
+            // Is it the valid car type?
+            // Will also exceed if the workshop takes all cars
+            // Or if the car is an instance of the accepted type
+            cars.add(car);
+        }
+        else {
+            throw new IllegalArgumentException("Workshop is full");
+        }
     }
 
     public void removeCar(model car) {
@@ -39,9 +36,6 @@ public class Workshop <model extends Car> {
         }
     }
 
-    public String getWorkshopPic(){
-        return imagePath;
-    }
     public ArrayList<model> getCars() {
         return cars;
     }

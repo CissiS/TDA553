@@ -4,11 +4,11 @@ public class Saab95 extends Car {
 
     private boolean turboOn;
 
-    
+
     public Saab95(){
-        super(2, 125, Color.red, "Saab95", 2, "pics/Saab95.jpg");
+        super(2, 125, Color.red, "Saab95", 2);
         setColor(Color.red);
-	    turboOn = false;
+        turboOn = false;
     }
 
     protected double speedFactor(){
@@ -24,4 +24,3 @@ public class Saab95 extends Car {
     protected void setTurboOff(){
         turboOn = false;
     }}
-

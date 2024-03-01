@@ -5,14 +5,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Simulator {
-    private final int delay = 50;
-    public Timer timer = new Timer(delay, new TimerListener());
-    private CarController carC;
 
+    private CarController carC;
+    private static final int X = 800;
+    private static final int Y = 800;
+    private final int delay = 50;
+
+    public Timer timer = new Timer(delay, new TimerListener());
 
     public Simulator() {
-        // Skapa en instans av CarController;
-        this.carC = new CarController(new CarMotionManager(new ArrayList<>(), new Workshop<>(5, new Point(0, 300), "pics/VolvoBrand.jpg")));
+
+        CarMotionManager cmm = new CarMotionManager(new ArrayList<>(), new Workshop<>(5, new Point(0, 300)));
+
+        cmm.VehicleListener(DrawPanel.getInstance(X,Y));
+
+        this.carC = new CarController(cmm);
     }
 
     public static void main(String[] args) {
@@ -31,13 +38,15 @@ public class Simulator {
 
         Vehicle scania = Factory.createVehicle("Scania", new Point(400, 0));
         carC.cmm.vehicles.add(scania);
-        
+
         // Skapa gränssnittet och starta simulationen
-        carC.frame.drawPanel.setVehicles(carC.cmm.vehicles);
-        carC.Workshop
+        DrawPanel.getInstance(X,Y).setVehicles(carC.cmm.vehicles);
+        DrawPanel.getInstance(X,Y).getWorkshopImage();
+
         // Start the timer
         timer.start();
     }
+
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : carC.cmm.getVehicles()) {
@@ -51,9 +60,9 @@ public class Simulator {
                 }
 
 
-                carC.frame.drawPanel.moveit(x, y, vehicle);
+                DrawPanel.getInstance(X,Y).moveit(x, y, vehicle);
                 // repaint() calls the paintComponent method of the panel
-                carC.frame.drawPanel.repaint();
+                DrawPanel.getInstance(X,Y).repaint();
                 carC.cmm.loadCar(vehicle);
             }
         }

@@ -3,7 +3,7 @@ import java.awt.*;
 public class Scania extends Truck{
 
     public Scania() {
-        super(2,100, Color.pink, "Scania", 4, "pics/Scania.jpg");
+        super(2,100, Color.pink, "Scania", 4);
     }
 
     @Override
@@ -12,4 +12,3 @@ public class Scania extends Truck{
     }
 
 }
-

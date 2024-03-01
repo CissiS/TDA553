@@ -7,7 +7,7 @@ public class CarTransport extends Truck implements CarTransportHandler{
     public Deque<Vehicle> cars;
 
     public CarTransport(){
-        super(2,300, Color.cyan, "CarCarrier", 6, "pics/CarCarrier.jpg");
+        super(2,300, Color.cyan, "CarCarrier", 6);
         cars = new ArrayDeque<>();
         stopEngine();
     }
@@ -28,6 +28,14 @@ public class CarTransport extends Truck implements CarTransportHandler{
         }
     }
 
+    @Override
+    public void move() {
+        super.move();
+        for (Vehicle car : cars) {
+            car.position.x = position.x;
+            car.position.y = position.y;
+        }
+    }
     @Override
     public void raise(double amount) {
         if (this.isRampPositioned()) {

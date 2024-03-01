@@ -6,8 +6,8 @@ public abstract class Truck extends Vehicle implements Ramp {
     private final double minRampAngle = 0;
     private final double maxRampAngle = 70;
 
-    public Truck (int nrDoors, double enginePower, Color color, String modelName, int length, String imagePath) {
-        super(enginePower, color, modelName, length, imagePath);
+    public Truck (int nrDoors, double enginePower, Color color, String modelName, int length) {
+        super(enginePower, color, modelName, length);
         this.nrDoors = nrDoors;
     }
 
@@ -32,7 +32,7 @@ public abstract class Truck extends Vehicle implements Ramp {
     }
 
     @Override
-        public void lower(double amount) {
+    public void lower(double amount) {
         if (rampAngle >= minRampAngle && currentSpeed == 0) {
             rampAngle = Math.max(rampAngle - amount, minRampAngle);
         } else {

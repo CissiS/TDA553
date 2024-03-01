@@ -16,5 +16,5 @@ public class Factory {
         String id = UUID.randomUUID().toString();
         createdVehicles.put(id, vehicle);
         return vehicle;
-        }
+    }
 }

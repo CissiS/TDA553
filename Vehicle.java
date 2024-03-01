@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.UUID;
 
-public abstract class Vehicle implements Movable{
+public abstract class  Vehicle implements Movable{
     //Common attributes
     private final double enginePower;
     protected double currentSpeed;
@@ -13,11 +13,9 @@ public abstract class Vehicle implements Movable{
 
     public boolean engineState;
     private String id;
-    String imagePath;
 
 
-
-    public Vehicle(double enginePower, Color color, String modelName, int length, String imagePath) {
+    public Vehicle(double enginePower, Color color, String modelName, int length) {
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
@@ -25,7 +23,6 @@ public abstract class Vehicle implements Movable{
         this.currentDirection = 90;
         this.length = length;
         this.id = UUID.randomUUID().toString();
-        this.imagePath = imagePath;
         stopEngine();
     }
 
@@ -149,8 +146,7 @@ public abstract class Vehicle implements Movable{
         return modelName.hashCode();
     }
 
-    }
-
+}
 
 
 
