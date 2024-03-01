@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 
 public class CarController {
-    private static final int X = 800;
-    private static final int Y = 800;
 
     public CarMotionManager cmm;
     CarView frame;

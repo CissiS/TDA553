@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Simulator {
 
     private CarController carC;
-    private static final int X = 800;
-    private static final int Y = 800;
+    private static final int X = 1000;
+    private static final int Y = 600;
     private final int delay = 50;
 
     public Timer timer = new Timer(delay, new TimerListener());
